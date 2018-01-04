@@ -1,6 +1,5 @@
 /* @flow */
 
-import { types as bt } from '@babel/core';
 import * as t from 'lua-types';
 
 export function Identifier(node: Object) {
