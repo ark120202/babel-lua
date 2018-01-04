@@ -1,0 +1,13 @@
+root: true
+parser: babel-eslint
+extends:
+  - ark120202
+  - ark120202/jest
+plugins:
+  - flowtype
+rules:
+  flowtype/define-flow-type: warn
+  flowtype/use-flow-type: warn
+globals:
+  Iterator: true
+  $Keys: true

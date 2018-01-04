@@ -1,0 +1,25 @@
+{
+  "name": "babel-plugin-lua-parameters",
+  "version": "1.0.0",
+  "description": "Compile ES2015 default and destructuring parameters to Lua.",
+  "keywords": [
+    "babel-lua",
+    "babel-plugin"
+  ],
+  "homepage": "https://github.com/ark120202/babel-lua#readme",
+  "bugs": "https://github.com/ark120202/babel-lua/issues",
+  "repository": "https://github.com/ark120202/babel-lua/tree/master/packages/babel-plugin-lua-parameters",
+  "main": "lib/index.js",
+  "author": "ark120202",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "^7.0.0-beta.36",
+    "babel-lua-test-script": "^1.0.0"
+  },
+  "peerDependencies": {
+    "@babel/core": "^7.0.0-beta.36"
+  },
+  "dependencies": {
+    "@babel/helper-call-delegate": "^7.0.0-beta.36"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "name": "babel-lua-test-script",
+  "version": "1.0.0",
+  "description": "Test runner for babel-lua transformations.",
+  "main": "lib/index.js",
+  "author": "ark120202",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "@babel/core": "^7.0.0-beta.36",
+    "minimist": "^1.2.0"
+  }
+}

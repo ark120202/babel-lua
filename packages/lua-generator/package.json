@@ -1,0 +1,25 @@
+{
+  "name": "lua-generator",
+  "version": "1.0.0",
+  "description": "Turn Lua AST into code.",
+  "keywords": [
+    "babel-lua",
+    "babel-plugin"
+  ],
+  "homepage": "https://github.com/ark120202/babel-lua#readme",
+  "bugs": "https://github.com/ark120202/babel-lua/issues",
+  "repository": "https://github.com/ark120202/babel-lua/tree/master/packages/lua-generator",
+  "main": "lib/index.js",
+  "author": "ark120202",
+  "license": "MIT",
+  "dependencies": {
+    "lodash": "^4.17.4",
+    "lua-types": "^1.0.0",
+    "source-map": "^0.6.1",
+    "trim-right": "^1.0.1"
+  },
+  "devDependencies": {
+    "fs-extra": "^4.0.2",
+    "lua-parse": "^1.0.0"
+  }
+}

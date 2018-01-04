@@ -1,0 +1,25 @@
+{
+  "name": "babel-plugin-lua-runtime",
+  "version": "1.0.0",
+  "description": "Externalise references to helpers and builtins, automatically polyfilling your code without polluting globals.",
+  "keywords": [
+    "babel-lua",
+    "babel-plugin"
+  ],
+  "homepage": "https://github.com/ark120202/babel-lua#readme",
+  "bugs": "https://github.com/ark120202/babel-lua/issues",
+  "repository": "https://github.com/ark120202/babel-lua/tree/master/packages/babel-plugin-lua-runtime",
+  "main": "lib/index.js",
+  "author": "ark120202",
+  "license": "MIT",
+  "dependencies": {
+    "@babel/helper-module-imports": "7.0.0-beta.36"
+  },
+  "peerDependencies": {
+    "@babel/core": "7.0.0-beta.36"
+  },
+  "devDependencies": {
+    "@babel/core": "7.0.0-beta.36",
+    "@babel/helper-plugin-test-runner": "7.0.0-beta.36"
+  }
+}

@@ -1,0 +1,5 @@
+/coverage
+/packages/*/node_modules
+/packages/*/lib
+/packages/*/__tests__/fixtures
+/flow-typed/npm

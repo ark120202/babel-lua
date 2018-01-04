@@ -1,0 +1,22 @@
+{
+  "name": "babel-plugin-lua-coroutines",
+  "version": "1.0.0",
+  "description": "Transform generators into Lua coroutines.",
+  "keywords": [
+    "babel-lua",
+    "babel-plugin"
+  ],
+  "homepage": "https://github.com/ark120202/babel-lua#readme",
+  "bugs": "https://github.com/ark120202/babel-lua/issues",
+  "repository": "https://github.com/ark120202/babel-lua/tree/master/packages/babel-plugin-lua-coroutines",
+  "main": "lib/index.js",
+  "author": "ark120202",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "^7.0.0-beta.36",
+    "babel-lua-test-script": "^1.0.0"
+  },
+  "peerDependencies": {
+    "@babel/core": "^7.0.0-beta.36"
+  }
+}

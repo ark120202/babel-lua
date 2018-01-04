@@ -1,0 +1,19 @@
+{
+  "name": "lua-parse",
+  "version": "1.0.0",
+  "description": "Lua Parse is a wrapper around luaparse, which adds more information to node locs.",
+  "keywords": [
+    "babel-lua",
+    "babel-plugin"
+  ],
+  "homepage": "https://github.com/ark120202/babel-lua#readme",
+  "bugs": "https://github.com/ark120202/babel-lua/issues",
+  "repository": "https://github.com/ark120202/babel-lua/tree/master/packages/lua-parse",
+  "main": "lib/index.js",
+  "author": "ark120202",
+  "license": "MIT",
+  "dependencies": {
+    "lua-types": "^1.0.0",
+    "luaparse": "^0.2.1"
+  }
+}

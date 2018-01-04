@@ -1,0 +1,18 @@
+{
+  "name": "babel-plugin-lua-reserved-words",
+  "version": "1.0.0",
+  "description": "Ensure that no reserved words are used.",
+  "keywords": [
+    "babel-lua",
+    "babel-plugin"
+  ],
+  "homepage": "https://github.com/ark120202/babel-lua#readme",
+  "bugs": "https://github.com/ark120202/babel-lua/issues",
+  "repository": "https://github.com/ark120202/babel-lua/tree/master/packages/babel-plugin-lua-reserved-words",
+  "main": "lib/index.js",
+  "author": "ark120202",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-lua-test-script": "^1.0.0"
+  }
+}

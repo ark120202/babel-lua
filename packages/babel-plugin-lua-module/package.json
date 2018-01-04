@@ -1,0 +1,22 @@
+{
+  "name": "babel-plugin-lua-module",
+  "version": "1.0.0",
+  "description": "Provide node-like module object for Lua.",
+  "keywords": [
+    "babel-lua",
+    "babel-plugin"
+  ],
+  "homepage": "https://github.com/ark120202/babel-lua#readme",
+  "bugs": "https://github.com/ark120202/babel-lua/issues",
+  "repository": "https://github.com/ark120202/babel-lua/tree/master/packages/babel-plugin-lua-module",
+  "main": "lib/index.js",
+  "author": "ark120202",
+  "license": "MIT",
+  "peerDependencies": {
+    "@babel/core": "7.0.0-beta.36"
+  },
+  "devDependencies": {
+    "@babel/core": "7.0.0-beta.36",
+    "babel-lua-test-script": "^1.0.0"
+  }
+}
