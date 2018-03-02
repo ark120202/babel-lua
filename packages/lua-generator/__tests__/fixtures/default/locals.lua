@@ -1,1 +1,1 @@
-local variable = "example";
+local variable = "example"

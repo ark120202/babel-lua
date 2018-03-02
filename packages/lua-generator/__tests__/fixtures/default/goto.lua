@@ -1,5 +1,5 @@
-local i = 0;
+local i = 0
 ::label::
-i = i + 1;
-print(i);
+i = i + 1
+print(i)
 goto label

@@ -17,4 +17,4 @@
 
 
 
-print("^^ there are lots of empty lines ^^");
+print("^^ there are lots of empty lines ^^")

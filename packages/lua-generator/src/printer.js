@@ -47,6 +47,7 @@ export default class Printer {
   _noLineTerminator: boolean = false;
   _endsWithInteger = false;
   _endsWithWord = false;
+  _endsWithCallStatement = false;
 
   generate(ast) {
     this.print(ast);
@@ -79,13 +80,10 @@ export default class Printer {
    */
 
   semicolon(force: boolean = false): void {
-    /* if (
-      ((this.format.compact || this.format.concise) && !this.endsWith('\n')) ||
-      this._isTwoFunctionsInLine()
-    ) {
+    if (force || ((this.format.compact || this.format.concise) && !this.endsWith('\n'))) {
       this._append(';', !force);
-    } */
-    this._append(';', !force);
+      this._endsWithCallStatement = false;
+    }
     // TODO: Print semicolons only when required.
     // In most places in Lua semicolons can be replaced with newlines, but in this case it fails:
     // (function() end)();
@@ -274,7 +272,10 @@ export default class Printer {
     this._printStack.push(node);
 
     const needsParens = n.needsParens(node, parent, this._printStack);
-    if (needsParens) this.token('(');
+    if (needsParens) {
+      if (this._endsWithCallStatement) this.semicolon(true);
+      this.token('(');
+    }
 
     // this._printLeadingComments(node, parent);
 
@@ -289,6 +290,7 @@ export default class Printer {
 
     // end
     this._printStack.pop();
+    this._endsWithCallStatement = node.type === 'CallStatement';
 
     this.format.concise = oldConcise;
   }

@@ -1,11 +1,11 @@
 if true then
-    print(1);
+    print(1)
 elseif false then
-    print(2);
+    print(2)
 else
     if true then
-        print(3);
+        print(3)
     else
-        print(4);
+        print(4)
     end
 end
