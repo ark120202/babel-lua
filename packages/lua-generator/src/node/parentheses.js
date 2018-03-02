@@ -65,34 +65,6 @@ function Binary(node: Object, parent: Object): boolean {
 
 export { Binary as LogicalExpression, Binary as BinaryExpression, Binary as UnaryExpression };
 
-function isFirstInStatement(printStack: Array<Object>): boolean {
-  let i = printStack.length - 1;
-  let node = printStack[i];
-  i -= 1;
-  let parent = printStack[i];
-  while (i > 0) {
-    if (t.isCallStatement(parent) && parent.expression === node) {
-      return true;
-    }
-
-    if (
-      (t.isCallExpression(parent) && parent.base === node) ||
-      (t.isMemberExpression(parent) && parent.base === node) ||
-      (t.isConditional(parent) && parent.test === node) ||
-      (t.isBinary(parent) && parent.left === node)
-      // (t.isAssignmentStatement(parent) && parent.left === node)
-    ) {
-      node = parent;
-      i -= 1;
-      parent = printStack[i];
-    } else {
-      return false;
-    }
-  }
-
-  return false;
-}
-
-export function FunctionDeclaration(node: Object, parent: Object, printStack: Array<Object>) {
-  return isFirstInStatement(printStack);
+export function FunctionDeclaration(node: Object, parent: Object) {
+  return t.isCallExpression(parent) && parent.base === node;
 }

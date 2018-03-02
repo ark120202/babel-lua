@@ -3,3 +3,4 @@ print "1";
 print {};
 (function() end)();
 (function() end)();
+local x = (function() end)();
