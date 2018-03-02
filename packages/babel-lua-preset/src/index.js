@@ -28,6 +28,7 @@ import luaReservedWords from 'babel-plugin-lua-reserved-words';
 import luaRuntime from 'babel-plugin-lua-runtime';
 import luaTernary from 'babel-plugin-lua-ternary';
 import luaTypeof from 'babel-plugin-lua-typeof';
+import luaGeneratorToCoroutine from 'babel-plugin-lua-generator-to-coroutine';
 
 export default function(api, opts = {}) {
   const loose = opts.loose || false;
@@ -76,6 +77,7 @@ export default function(api, opts = {}) {
       luaRuntime,
       luaTernary,
       luaTypeof,
+      luaGeneratorToCoroutine,
     ],
   };
 }
