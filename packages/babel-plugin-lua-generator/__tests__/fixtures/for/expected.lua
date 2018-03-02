@@ -37,3 +37,11 @@ end
 for k in pairs(obj) do
   print(k, obj[k])
 end
+
+for __blk_, v in pairs(obj) do
+  print(v)
+end
+
+for __blk_, v in pairs(obj) do
+  print(v)
+end
