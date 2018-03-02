@@ -99,7 +99,7 @@ export function ObjectExpression(node: Object) {
 }
 
 export function ObjectProperty(node: Object) {
-  const constructor = node.computed ? t.tableKey : t.tableKeyString;
+  const constructor = node.computed || bt.isLiteral(node.key) ? t.tableKey : t.tableKeyString;
   return constructor(this.transform(node.key), this.transform(node.value));
 }
 
