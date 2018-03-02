@@ -7,6 +7,10 @@ export function Identifier(node: Object) {
   return t.identifier(node.name);
 }
 
+export function ThisExpression() {
+  return t.identifier('this');
+}
+
 export function StringLiteral(node: Object) {
   return t.stringLiteral(node.value);
 }
