@@ -1,4 +1,7 @@
 function x(key, value) {
+  {
+    var x = 1;
+  }
   return 1;
 }
 

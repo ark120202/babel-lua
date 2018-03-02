@@ -1,4 +1,7 @@
 local function x(key, value)
+  do
+    local x = 1
+  end
   return 1
 end
 
