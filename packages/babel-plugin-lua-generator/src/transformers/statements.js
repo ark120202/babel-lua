@@ -48,8 +48,8 @@ export function ThrowStatement(node: Object) {
 }
 
 export function VariableDeclaration(node: Object) {
-  // FIXME: Use path.buildCodeFrameError
-  if (node.kind !== 'var') throw new Error(`${node.kind} variables are not supported`);
+  // In JS let and const scoping are like local in Lua, but there is no alternative for var.
+  // TODO: Make a plugin to fix scope or prohibit var use at all.
   return this.transformList(node.declarations);
 }
 
