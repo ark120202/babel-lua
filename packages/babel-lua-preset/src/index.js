@@ -32,6 +32,7 @@ import luaGeneratorToCoroutine from 'babel-plugin-lua-generator-to-coroutine';
 export default function(api, opts = {}) {
   const loose = opts.loose || false;
   const spec = opts.spec || false;
+  const { luaRoot } = opts;
 
   if (typeof loose !== 'boolean') {
     throw new TypeError("Preset lua 'loose' option must be a boolean.");
@@ -69,7 +70,7 @@ export default function(api, opts = {}) {
 
       luaGenerator,
       luaModule,
-      luaModuleResolver,
+      [luaModuleResolver, { luaRoot }],
       luaParameters,
       luaReservedWords,
       luaRuntime,
