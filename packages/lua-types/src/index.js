@@ -43,6 +43,8 @@ export const types = [
   'TableCallExpression',
   'StringCallExpression',
   'Comment',
+
+  'LuaRaw',
 ];
 
 export const isLabelStatement = (node: LuaNode) => node.type === 'LabelStatement';
@@ -83,6 +85,8 @@ export const isCallExpression = (node: LuaNode) => node.type === 'CallExpression
 export const isTableCallExpression = (node: LuaNode) => node.type === 'TableCallExpression';
 export const isStringCallExpression = (node: LuaNode) => node.type === 'StringCallExpression';
 export const isComment = (node: LuaNode) => node.type === 'Comment';
+
+export const isLuaRaw = (node: LuaNode) => node.type === 'LuaRaw';
 
 export const isBinary = (node: LuaNode) => isLogicalExpression(node) || isBinaryExpression(node);
 export const isConditional = (node: LuaNode) => isIfClause(node) || isElseifClause(node);
@@ -133,6 +137,10 @@ export const {
   stringCallExpression,
   comment,
 } = luaparse.ast;
+
+export function luaRaw(code: string): LuaNode {
+  return { type: 'LuaRaw', code };
+}
 
 export const stringLiteral = (value: string, raw?: string) =>
   literal(tokenTypes.StringLiteral, value, raw);

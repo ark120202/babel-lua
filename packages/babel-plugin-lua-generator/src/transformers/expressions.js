@@ -4,11 +4,8 @@ import { types as bt } from '@babel/core';
 import * as t from 'lua-types';
 
 export function BinaryExpression(node: Object) {
-  return t.binaryExpression(
-    node.operator === '===' ? '==' : node.operator,
-    this.transform(node.left),
-    this.transform(node.right),
-  );
+  const operator = node.operator === '===' ? '==' : node.operator;
+  return t.binaryExpression(operator, this.transform(node.left), this.transform(node.right));
 }
 
 export function LogicalExpression(node: Object) {
@@ -89,7 +86,7 @@ export function CallExpression(node: Object) {
     const argument = node.arguments[0];
     // TODO: Use path.evaluate, ref: https://github.com/babel/babel/blob/6.x/packages/babel-plugin-transform-eval/src/index.js
     if (bt.isStringLiteral(argument)) {
-      return { type: 'LuaRaw', code: argument.value };
+      return t.luaRaw(argument.value);
     }
   }
 
