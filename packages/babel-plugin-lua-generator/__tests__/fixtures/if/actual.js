@@ -1,7 +1,7 @@
 if (true) {
-  console.log('yes');
+  print('yes');
 } else if (!true) {
-  console.log('no');
+  print('no');
 } else {
-  console.log('never!')
+  print('never!')
 }

@@ -23,7 +23,7 @@ end
 local i = 0
 while i < 10 do
   print(i)
-  i = i + math.random()
+  i = i + math:random()
 end
 
 while true do

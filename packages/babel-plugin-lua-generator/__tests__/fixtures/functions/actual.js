@@ -14,3 +14,10 @@ var x = function x() {
 };
 
 print(print());
+
+var tbl = {
+  add: function(self, a, b) {
+    return a + b;
+  },
+};
+tbl.add(1, 2);

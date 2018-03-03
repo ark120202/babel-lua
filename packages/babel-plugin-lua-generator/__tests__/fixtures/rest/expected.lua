@@ -1,4 +1,4 @@
 local function foo(...)
   local args = { ... }
-  console.log(table.unpack(args))
+  print(table.unpack(args))
 end

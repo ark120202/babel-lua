@@ -14,3 +14,10 @@ local x = function()
 end
 
 print(print())
+
+local tbl = {
+  add = function(self, a, b)
+    return a + b
+  end
+}
+tbl:add(1, 2)

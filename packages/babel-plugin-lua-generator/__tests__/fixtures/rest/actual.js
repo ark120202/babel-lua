@@ -1,3 +1,3 @@
 function foo(...args) {
-  console.log(...args)
+  print(...args)
 }
