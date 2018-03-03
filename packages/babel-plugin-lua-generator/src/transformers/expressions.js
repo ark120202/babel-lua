@@ -85,6 +85,14 @@ export function UnaryExpression(node: Object) {
 }
 
 export function CallExpression(node: Object) {
+  if (bt.isIdentifier(node.callee, { name: '__lua' }) && node.arguments.length === 1) {
+    const argument = node.arguments[0];
+    // TODO: Use path.evaluate, ref: https://github.com/babel/babel/blob/6.x/packages/babel-plugin-transform-eval/src/index.js
+    if (bt.isStringLiteral(argument)) {
+      return { type: 'LuaRaw', code: argument.value };
+    }
+  }
+
   return t.callExpression(this.transform(node.callee), this.transformList(node.arguments));
 }
 

@@ -1,5 +1,9 @@
 /* @flow */
 
+export function LuaRaw(node: Object) {
+  this._append(node.code);
+}
+
 export function Chunk(node: Object) {
   this.printSequence(node.body, node);
 }

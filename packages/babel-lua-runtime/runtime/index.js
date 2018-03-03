@@ -18,7 +18,6 @@ debug.setmetatable(function() {}, {
 const String = require('./builtins/string');
 debug.setmetatable('', {
   __add(str) {
-    // TODO: Implement __lua macros
     return __lua('this .. str');
   },
   __index(index) {
