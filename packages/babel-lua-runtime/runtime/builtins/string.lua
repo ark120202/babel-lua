@@ -1,4 +1,4 @@
-local String = {}
+local String = { prototype = {} }
 
 String.fromCharCode = string.char
 String.fromCodePoint = nil

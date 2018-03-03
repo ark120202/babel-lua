@@ -3,36 +3,23 @@ import { types as t } from '@babel/core';
 
 import definitions from './definitions';
 
+const HEADER_HELPERS = ['interopRequireWildcard', 'interopRequireDefault'];
+
 export default function(api, options) {
-  const { helpers, moduleName = 'babel-lua-runtime', polyfill, useBuiltIns } = options;
-  const isPolyfillAndUseBuiltIns = polyfill && useBuiltIns;
-
-  function has(obj, key) {
-    return Object.prototype.hasOwnProperty.call(obj, key);
-  }
-
-  const HEADER_HELPERS = ['interopRequireWildcard', 'interopRequireDefault'];
+  const { moduleName = 'babel-lua-runtime' } = options;
 
   return {
     pre(file) {
-      if (helpers !== false) {
-        file.set('helperGenerator', name => {
-          const isInteropHelper = HEADER_HELPERS.indexOf(name) !== -1;
+      file.set('helperGenerator', name => {
+        const isInteropHelper = HEADER_HELPERS.includes(name);
 
-          // Explicitly set the CommonJS interop helpers to their reserve
-          // blockHoist of 4 so they are guaranteed to exist
-          // when other things used them to import.
-          const blockHoist = isInteropHelper && !isModule(file.path) ? 4 : undefined;
+        // Explicitly set the CommonJS interop helpers to their reserve
+        // blockHoist of 4 so they are guaranteed to exist
+        // when other things used them to import.
+        const blockHoist = isInteropHelper && !isModule(file.path) ? 4 : undefined;
 
-          return this.addDefaultImport(`${moduleName}.helpers.${name}`, name, blockHoist);
-        });
-      }
-
-      if (isPolyfillAndUseBuiltIns) {
-        throw new Error('The polyfill option conflicts with useBuiltIns; use one or the other');
-      }
-
-      this.moduleName = moduleName;
+        return this.addDefaultImport(`${moduleName}/helpers/${name}`, name, blockHoist);
+      });
 
       const cache = new Map();
 
@@ -65,13 +52,13 @@ export default function(api, options) {
 
         // ARRAY.from is ok, array.FROM is not
         if (t.isMemberExpression(parent) && parent.object !== node) return;
-        if (!has(definitions.builtins, node.name)) return;
+        if (definitions.builtins[node.name] == null) return;
         if (scope.getBindingIdentifier(node.name)) return;
 
         // Symbol() -> _core.Symbol(); new Promise -> new _core.Promise
         path.replaceWith(
           this.addDefaultImport(
-            `${moduleName}.builtins.${definitions.builtins[node.name]}`,
+            `${moduleName}/builtins/${definitions.builtins[node.name]}`,
             node.name,
           ),
         );

@@ -1,7 +1,7 @@
 {
   "name": "babel-lua-runtime",
   "version": "1.0.0",
-  "description": "EcmaScript for Lua.",
+  "description": "Runtime library used in Lua to provide JS standard library and transformation helpers.",
   "keywords": [
     "babel-lua",
     "babel-plugin"
@@ -9,8 +9,10 @@
   "homepage": "https://github.com/ark120202/babel-lua#readme",
   "bugs": "https://github.com/ark120202/babel-lua/issues",
   "repository": "https://github.com/ark120202/babel-lua/tree/master/packages/babel-lua-runtime",
-  "main": "index.js",
-  "types": "index.d.ts",
+  "main": "runtime/index.js",
   "author": "ark120202",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "types-lua": "^1.0.1"
+  }
 }

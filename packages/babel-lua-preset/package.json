@@ -35,7 +35,6 @@
     "@babel/plugin-transform-unicode-regex": "7.0.0-beta.36",
     "babel-plugin-lua-generator": "^1.0.0",
     "babel-plugin-lua-generator-to-coroutine": "^1.0.0",
-    "babel-plugin-lua-helpers": "^1.0.0",
     "babel-plugin-lua-module": "^1.0.0",
     "babel-plugin-lua-module-resolver": "^1.0.0",
     "babel-plugin-lua-parameters": "^1.0.0",

@@ -20,7 +20,6 @@ import transformES2015Instanceof from '@babel/plugin-transform-instanceof';
 import transformRegenerator from '@babel/plugin-transform-regenerator';
 
 import luaGenerator from 'babel-plugin-lua-generator';
-import luaHelpers from 'babel-plugin-lua-helpers';
 import luaModule from 'babel-plugin-lua-module';
 import luaModuleResolver from 'babel-plugin-lua-module-resolver';
 import luaParameters from 'babel-plugin-lua-parameters';
@@ -69,7 +68,6 @@ export default function(api, opts = {}) {
       [transformRegenerator, { async: false, asyncGenerators: false }],
 
       luaGenerator,
-      luaHelpers,
       luaModule,
       luaModuleResolver,
       luaParameters,

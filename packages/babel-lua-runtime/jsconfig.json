@@ -1,0 +1,6 @@
+{
+  "include": [
+    "runtime/**/*.js",
+    "node_modules/types-lua/**/*.ts"
+  ]
+}

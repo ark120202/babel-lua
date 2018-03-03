@@ -2,4 +2,5 @@
 /packages/*/node_modules
 /packages/*/lib
 /packages/*/__tests__/fixtures
+/packages/babel-lua-runtime/runtime/*
 /flow-typed/npm

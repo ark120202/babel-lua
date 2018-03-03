@@ -63,11 +63,11 @@ function testRunner(dir) {
           config.babelrc = false;
           config.filename = actualFile;
 
-          const helpersPath = path.join(packagesDir, 'babel-plugin-lua-helpers', 'src/index.js');
+          const externalHelpers = require.resolve('@babel/plugin-external-helpers');
           const pluginPath = path.join(pkgDir, 'src/index.js');
 
           if (!config.plugins) config.plugins = [];
-          config.plugins.push(helpersPath, [pluginPath, options]);
+          config.plugins.push(externalHelpers, [pluginPath, options]);
 
           const actualTransformed = transform(actual, config).code.trim();
 
