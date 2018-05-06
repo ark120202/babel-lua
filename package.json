@@ -4,6 +4,9 @@
   "author": "ark120202",
   "license": "MIT",
   "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
   "scripts": {
     "bootstrap": "lerna bootstrap",
     "build": "gulp build",

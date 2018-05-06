@@ -1,8 +1,5 @@
 {
-  "lerna": "2.5.1",
-  "packages": [
-    "packages/*"
-  ],
+  "lerna": "3.0.0",
   "changelog": {
     "repo": "ark120202/babel-lua",
     "labels": {
@@ -26,7 +23,5 @@
   "cacheDir": ".changelog",
   "version": "independent",
   "npmClient": "yarn",
-  "npmClientArgs": [
-    "--no-lockfile"
-  ]
+  "useWorkspaces": true
 }
