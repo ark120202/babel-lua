@@ -13,6 +13,9 @@ const visitor = {
     enter(programPath, state) {
       programPath.traverse(importVisitors, state);
     },
+    exit(programPath, state) {
+      programPath.traverse(importVisitors, state);
+    },
   },
 };
 
@@ -21,6 +24,7 @@ export default ({ types }) => ({
 
   pre(file) {
     this.types = types;
+    this.moduleResolverVisited = new Set();
 
     this.normalizedOpts = normalizeOptions(file.opts.filename, this.opts);
 
@@ -32,4 +36,8 @@ export default ({ types }) => ({
   },
 
   visitor,
+
+  post() {
+    this.moduleResolverVisited.clear();
+  },
 });

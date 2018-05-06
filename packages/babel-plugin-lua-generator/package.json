@@ -13,13 +13,13 @@
   "author": "ark120202",
   "license": "MIT",
   "dependencies": {
-    "@babel/core": "^7.0.0-beta.36",
+    "@babel/core": "^7.0.0-beta.46",
     "lodash": "^4.17.4",
     "lua-generator": "^1.0.0",
     "lua-types": "^1.0.0"
   },
   "devDependencies": {
-    "babylon": "^7.0.0-beta.36",
+    "babylon": "^7.0.0-beta.46",
     "fs-extra": "^4.0.3",
     "luaparse": "^0.2.1"
   }

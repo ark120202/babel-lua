@@ -1,4 +1,4 @@
-var _Math = require("babel-lua-runtime.builtins.math");
+import _Math from "babel-lua-runtime/builtins/math";
 
 _Math.floor(0.5);
 

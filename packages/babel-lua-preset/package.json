@@ -13,26 +13,19 @@
   "author": "ark120202",
   "license": "MIT",
   "dependencies": {
-    "@babel/plugin-check-constants": "7.0.0-beta.36",
-    "@babel/plugin-transform-arrow-functions": "7.0.0-beta.36",
-    "@babel/plugin-transform-block-scoped-functions": "7.0.0-beta.36",
-    "@babel/plugin-transform-block-scoping": "7.0.0-beta.36",
-    "@babel/plugin-transform-classes": "7.0.0-beta.36",
-    "@babel/plugin-transform-computed-properties": "7.0.0-beta.36",
-    "@babel/plugin-transform-destructuring": "7.0.0-beta.36",
-    "@babel/plugin-transform-duplicate-keys": "7.0.0-beta.36",
-    "@babel/plugin-transform-for-of": "7.0.0-beta.36",
-    "@babel/plugin-transform-instanceof": "7.0.0-beta.36",
-    "@babel/plugin-transform-literals": "7.0.0-beta.36",
-    "@babel/plugin-transform-modules-commonjs": "7.0.0-beta.36",
-    "@babel/plugin-transform-object-super": "7.0.0-beta.36",
-    "@babel/plugin-transform-regenerator": "7.0.0-beta.36",
-    "@babel/plugin-transform-shorthand-properties": "7.0.0-beta.36",
-    "@babel/plugin-transform-spread": "7.0.0-beta.36",
-    "@babel/plugin-transform-sticky-regex": "7.0.0-beta.36",
-    "@babel/plugin-transform-template-literals": "7.0.0-beta.36",
-    "@babel/plugin-transform-typeof-symbol": "7.0.0-beta.36",
-    "@babel/plugin-transform-unicode-regex": "7.0.0-beta.36",
+    "@babel/plugin-transform-arrow-functions": "7.0.0-beta.46",
+    "@babel/plugin-transform-block-scoped-functions": "7.0.0-beta.46",
+    "@babel/plugin-transform-block-scoping": "7.0.0-beta.46",
+    "@babel/plugin-transform-destructuring": "7.0.0-beta.46",
+    "@babel/plugin-transform-duplicate-keys": "7.0.0-beta.46",
+    "@babel/plugin-transform-literals": "7.0.0-beta.46",
+    "@babel/plugin-transform-modules-commonjs": "7.0.0-beta.46",
+    "@babel/plugin-transform-object-super": "7.0.0-beta.46",
+    "@babel/plugin-transform-shorthand-properties": "7.0.0-beta.46",
+    "@babel/plugin-transform-spread": "7.0.0-beta.46",
+    "@babel/plugin-transform-sticky-regex": "7.0.0-beta.46",
+    "@babel/plugin-transform-template-literals": "7.0.0-beta.46",
+    "@babel/plugin-transform-unicode-regex": "7.0.0-beta.46",
     "babel-plugin-lua-function-context": "^1.0.0",
     "babel-plugin-lua-generator": "^1.0.0",
     "babel-plugin-lua-generator-to-coroutine": "^1.0.0",
@@ -45,6 +38,6 @@
     "babel-plugin-lua-typeof": "^1.0.0"
   },
   "peerDependencies": {
-    "@babel/core": "7.0.0-beta.36"
+    "@babel/core": "7.0.0-beta.46"
   }
 }

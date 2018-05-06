@@ -13,7 +13,7 @@
   "author": "ark120202",
   "license": "MIT",
   "dependencies": {
-    "@babel/core": "^7.0.0-beta.36"
+    "@babel/core": "^7.0.0-beta.46"
   },
   "devDependencies": {
     "babel-lua-test-script": "^1.0.0"
