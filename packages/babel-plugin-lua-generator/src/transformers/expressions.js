@@ -115,3 +115,10 @@ export function ObjectProperty(node: Object) {
 export function ArrayExpression(node: Object) {
   return t.tableConstructorExpression(this.transformList(node.elements).map(n => t.tableValue(n)));
 }
+
+export function SequenceExpression(node: Object) {
+  return t.indexExpression(
+    t.tableConstructorExpression(this.transformList(node.expressions).map(n => t.tableValue(n))),
+    t.numericLiteral(node.expressions.length),
+  );
+}

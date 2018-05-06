@@ -10,3 +10,4 @@ local x = (1 .. 1) + 1
 local x = 1 .. 1 + 1
 local x = "x" .. "y" .. "z"
 local x = ("x" .. "y") .. "z"
+local x = ({})[0]

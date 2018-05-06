@@ -68,3 +68,7 @@ export { Binary as LogicalExpression, Binary as BinaryExpression, Binary as Unar
 export function FunctionDeclaration(node: Object, parent: Object) {
   return t.isCallExpression(parent) && parent.base === node;
 }
+
+export function TableConstructorExpression(node: Object, parent: Object) {
+  return t.isIndexExpression(parent) && parent.base === node;
+}
