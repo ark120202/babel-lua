@@ -42,6 +42,8 @@ export default function(api, options) {
 
           cache.set(key, cached);
         }
+        cached[Symbol.for('helper')] = true;
+
         return cached;
       };
     },

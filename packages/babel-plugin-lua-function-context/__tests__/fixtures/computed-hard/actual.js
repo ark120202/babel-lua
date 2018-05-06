@@ -1,0 +1,1 @@
+c.chain()['foo']('bar');

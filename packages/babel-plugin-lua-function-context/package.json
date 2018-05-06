@@ -1,0 +1,22 @@
+{
+  "name": "babel-plugin-lua-function-context",
+  "version": "1.0.0",
+  "description": "Emulate JS function context behavior in Lua",
+  "keywords": [
+    "babel-lua",
+    "babel-plugin"
+  ],
+  "homepage": "https://github.com/ark120202/babel-lua#readme",
+  "bugs": "https://github.com/ark120202/babel-lua/issues",
+  "repository": "https://github.com/ark120202/babel-lua/tree/master/packages/babel-plugin-lua-function-context",
+  "main": "lib/index.js",
+  "author": "ark120202",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "^7.0.0-beta.40",
+    "babel-lua-test-script": "^1.0.0"
+  },
+  "peerDependencies": {
+    "@babel/core": "^7.0.0-beta.40"
+  }
+}
