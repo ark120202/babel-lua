@@ -7,7 +7,7 @@ export default function() {
     generatorOverride(ast: LuaNode, options: Object, code: string): { code: string } {
       const luaAst = transform(ast);
       if (Array.isArray(luaAst)) throw new Error('Unexpected array as transformation result');
-      const lua = generate(luaAst, {}, code);
+      const lua = generate(luaAst, options, code);
       return lua;
     },
     visitor: {
