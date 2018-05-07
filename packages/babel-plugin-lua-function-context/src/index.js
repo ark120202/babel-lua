@@ -1,8 +1,9 @@
 import { types as t } from '@babel/core';
 
+const NO_MARK = Symbol('no mark');
 const NO_WRAP = Symbol('no wrap');
 
-export default function () {
+export default function() {
   return {
     visitor: {
       CallExpression(path) {
@@ -11,11 +12,12 @@ export default function () {
         const calleePath = path.get('callee');
 
         if (calleePath.isIdentifier()) {
-          // Don't wrap helpers, require, __lua macro and functions without arguments
+          // Don't wrap helpers, require, marcos's and functions without arguments
           if (
             !calleePath.node[Symbol.for('helper')] &&
             calleePath.node.name !== 'require' &&
             calleePath.node.name !== '__lua' &&
+            calleePath.node.name !== '__export' &&
             path.node.arguments.length > 0
           ) {
             path.node.callee = t.memberExpression(calleePath.node, t.identifier('call'));
@@ -71,6 +73,16 @@ export default function () {
       },
 
       'FunctionExpression|ArrowFunctionExpression': function FunctionExpression(path, state) {
+        if (path.node[NO_MARK]) return;
+        if (
+          path.parentPath.isCallExpression() &&
+          path.parentPath.get('callee').isIdentifier({ name: '__export' })
+        ) {
+          path.node[NO_MARK] = true;
+          path.parentPath.replaceWith(path.node);
+          return;
+        }
+
         const { node } = path;
         const isArrow = path.isArrowFunctionExpression();
 
