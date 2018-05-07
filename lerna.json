@@ -1,5 +1,16 @@
 {
   "lerna": "3.0.0",
+  "version": "independent",
+  "npmClient": "yarn",
+  "useWorkspaces": true,
+  "commands": {
+    "publish": {
+      "ignore": [
+        "*.md",
+        "__tests__/**"
+      ]
+    }
+  },
   "changelog": {
     "repo": "ark120202/babel-lua",
     "labels": {
@@ -12,16 +23,5 @@
       "PR: Internal": ":house: Internal"
     }
   },
-  "commands": {
-    "publish": {
-      "ignore": [
-        "*.md",
-        "__tests__/**"
-      ]
-    }
-  },
-  "cacheDir": ".changelog",
-  "version": "independent",
-  "npmClient": "yarn",
-  "useWorkspaces": true
+  "cacheDir": ".changelog"
 }

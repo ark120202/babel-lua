@@ -47,7 +47,7 @@
     "gulp-babel": "^8.0.0-beta.0",
     "gulp-filter": "^5.1.0",
     "jest": "^22.0.4",
-    "lerna": "^2.5.1",
+    "lerna": "^3.0.0-beta.19",
     "lerna-changelog": "^0.7.0",
     "prettier": "^1.9.2",
     "stream-combiner2": "^1.1.1",
