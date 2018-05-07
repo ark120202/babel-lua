@@ -1,14 +1,14 @@
 {
-  "name": "babel-plugin-lua-module",
+  "name": "babel-plugin-lua-modules",
   "version": "1.0.0",
-  "description": "Provide node-like module object for Lua.",
+  "description": "This plugin transforms ES2015 modules to Lua requires",
   "keywords": [
     "babel-lua",
     "babel-plugin"
   ],
   "homepage": "https://github.com/ark120202/babel-lua#readme",
   "bugs": "https://github.com/ark120202/babel-lua/issues",
-  "repository": "https://github.com/ark120202/babel-lua/tree/master/packages/babel-plugin-lua-module",
+  "repository": "https://github.com/ark120202/babel-lua/tree/master/packages/babel-plugin-lua-modules",
   "main": "lib/index.js",
   "author": "ark120202",
   "license": "MIT",

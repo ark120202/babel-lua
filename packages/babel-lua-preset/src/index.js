@@ -10,10 +10,8 @@ import transformES2015UnicodeRegex from '@babel/plugin-transform-unicode-regex';
 // import transformES2015Spread from '@babel/plugin-transform-spread';
 import transformES2015Destructuring from '@babel/plugin-transform-destructuring';
 // import transformES2015BlockScoping from '@babel/plugin-transform-block-scoping';
-import transformES2015ModulesCommonJS from '@babel/plugin-transform-modules-commonjs';
 
 import luaGenerator from 'babel-plugin-lua-generator';
-import luaModule from 'babel-plugin-lua-module';
 import luaModuleResolver from 'babel-plugin-lua-module-resolver';
 import luaParameters from 'babel-plugin-lua-parameters';
 import luaReservedWords from 'babel-plugin-lua-reserved-words';
@@ -22,6 +20,7 @@ import luaTernary from 'babel-plugin-lua-ternary';
 import luaTypeof from 'babel-plugin-lua-typeof';
 import luaGeneratorToCoroutine from 'babel-plugin-lua-generator-to-coroutine';
 import luaFunctionContext from 'babel-plugin-lua-function-context';
+import luaModules from 'babel-plugin-lua-modules';
 
 export default function(api, opts = {}) {
   const loose = opts.loose || false;
@@ -52,10 +51,8 @@ export default function(api, opts = {}) {
       // [transformES2015Spread, optsLoose],
       [transformES2015Destructuring, optsLoose],
       // transformES2015BlockScoping,
-      [transformES2015ModulesCommonJS, optsLoose],
 
       luaGenerator,
-      luaModule,
       [luaModuleResolver, { luaRoot }],
       luaParameters,
       luaReservedWords,
@@ -64,6 +61,7 @@ export default function(api, opts = {}) {
       luaTypeof,
       luaGeneratorToCoroutine,
       luaFunctionContext,
+      luaModules,
     ],
   };
 }

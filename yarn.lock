@@ -24,7 +24,7 @@
   dependencies:
     "@babel/highlight" "7.0.0-beta.46"
 
-"@babel/core@7.0.0-beta.46", "@babel/core@^7.0.0-beta.46", "@babel/core@^7.0.0-beta.46":
+"@babel/core@7.0.0-beta.46", "@babel/core@^7.0.0-beta.46":
   version "7.0.0-beta.46"
   resolved "https://registry.yarnpkg.com/@babel/core/-/core-7.0.0-beta.46.tgz#dbe2189bcdef9a2c84becb1ec624878d31a95689"
   dependencies:
@@ -226,17 +226,6 @@
     "@babel/types" "7.0.0-beta.36"
     lodash "^4.2.0"
 
-"@babel/helper-module-transforms@7.0.0-beta.46":
-  version "7.0.0-beta.46"
-  resolved "https://registry.yarnpkg.com/@babel/helper-module-transforms/-/helper-module-transforms-7.0.0-beta.46.tgz#90ad981f3a0020d9a8e526296555a5dd7e87cf5e"
-  dependencies:
-    "@babel/helper-module-imports" "7.0.0-beta.46"
-    "@babel/helper-simple-access" "7.0.0-beta.46"
-    "@babel/helper-split-export-declaration" "7.0.0-beta.46"
-    "@babel/template" "7.0.0-beta.46"
-    "@babel/types" "7.0.0-beta.46"
-    lodash "^4.2.0"
-
 "@babel/helper-optimise-call-expression@7.0.0-beta.36":
   version "7.0.0-beta.36"
   resolved "https://registry.yarnpkg.com/@babel/helper-optimise-call-expression/-/helper-optimise-call-expression-7.0.0-beta.36.tgz#a35f3ce99e20dc9cda7e23e24530cd0adb33ed2f"
@@ -299,14 +288,6 @@
   dependencies:
     "@babel/template" "7.0.0-beta.36"
     "@babel/types" "7.0.0-beta.36"
-    lodash "^4.2.0"
-
-"@babel/helper-simple-access@7.0.0-beta.46":
-  version "7.0.0-beta.46"
-  resolved "https://registry.yarnpkg.com/@babel/helper-simple-access/-/helper-simple-access-7.0.0-beta.46.tgz#8eb0edf978c85915d11b6a7aa8591434e158170d"
-  dependencies:
-    "@babel/template" "7.0.0-beta.46"
-    "@babel/types" "7.0.0-beta.46"
     lodash "^4.2.0"
 
 "@babel/helper-split-export-declaration@7.0.0-beta.46":
@@ -656,14 +637,6 @@
   dependencies:
     "@babel/helper-module-transforms" "7.0.0-beta.36"
     "@babel/helper-simple-access" "7.0.0-beta.36"
-
-"@babel/plugin-transform-modules-commonjs@7.0.0-beta.46":
-  version "7.0.0-beta.46"
-  resolved "https://registry.yarnpkg.com/@babel/plugin-transform-modules-commonjs/-/plugin-transform-modules-commonjs-7.0.0-beta.46.tgz#9dcb42e1282b281c1a2075f98b4a850533acfd9c"
-  dependencies:
-    "@babel/helper-module-transforms" "7.0.0-beta.46"
-    "@babel/helper-plugin-utils" "7.0.0-beta.46"
-    "@babel/helper-simple-access" "7.0.0-beta.46"
 
 "@babel/plugin-transform-modules-systemjs@7.0.0-beta.36":
   version "7.0.0-beta.36"
