@@ -11,10 +11,11 @@ export default function () {
         const calleePath = path.get('callee');
 
         if (calleePath.isIdentifier()) {
-          // Don't wrap helpers, require and functions without arguments
+          // Don't wrap helpers, require, __lua macro and functions without arguments
           if (
             !calleePath.node[Symbol.for('helper')] &&
             calleePath.node.name !== 'require' &&
+            calleePath.node.name !== '__lua' &&
             path.node.arguments.length > 0
           ) {
             path.node.callee = t.memberExpression(calleePath.node, t.identifier('call'));
