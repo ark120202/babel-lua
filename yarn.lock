@@ -467,10 +467,6 @@
   version "7.0.0-beta.36"
   resolved "https://registry.yarnpkg.com/@babel/plugin-syntax-export-namespace-from/-/plugin-syntax-export-namespace-from-7.0.0-beta.36.tgz#1b18fe72b0c704b6817412ed40698e0ed231c68a"
 
-"@babel/plugin-syntax-flow@7.0.0-beta.36":
-  version "7.0.0-beta.36"
-  resolved "https://registry.yarnpkg.com/@babel/plugin-syntax-flow/-/plugin-syntax-flow-7.0.0-beta.36.tgz#6a508f683547193560b4eade7b93bdd033188dfc"
-
 "@babel/plugin-syntax-function-bind@7.0.0-beta.36":
   version "7.0.0-beta.36"
   resolved "https://registry.yarnpkg.com/@babel/plugin-syntax-function-bind/-/plugin-syntax-function-bind-7.0.0-beta.36.tgz#5650588990745e76564dc95a36981a7c7707f4aa"
@@ -598,12 +594,6 @@
   resolved "https://registry.yarnpkg.com/@babel/plugin-transform-exponentiation-operator/-/plugin-transform-exponentiation-operator-7.0.0-beta.36.tgz#3c61b7412a38a8718f554f6a31e655eee9c2d182"
   dependencies:
     "@babel/helper-builder-binary-assignment-operator-visitor" "7.0.0-beta.36"
-
-"@babel/plugin-transform-flow-strip-types@7.0.0-beta.36":
-  version "7.0.0-beta.36"
-  resolved "https://registry.yarnpkg.com/@babel/plugin-transform-flow-strip-types/-/plugin-transform-flow-strip-types-7.0.0-beta.36.tgz#dc7b6d8f8e15f8a2f1bea67871bd1a274649fa12"
-  dependencies:
-    "@babel/plugin-syntax-flow" "7.0.0-beta.36"
 
 "@babel/plugin-transform-for-of@7.0.0-beta.36":
   version "7.0.0-beta.36"
@@ -787,12 +777,6 @@
     browserslist "^2.4.0"
     invariant "^2.2.2"
     semver "^5.3.0"
-
-"@babel/preset-flow@^7.0.0-beta.36":
-  version "7.0.0-beta.36"
-  resolved "https://registry.yarnpkg.com/@babel/preset-flow/-/preset-flow-7.0.0-beta.36.tgz#b9b2f519f2a389e95483f36ec616ad8d42a9cf6b"
-  dependencies:
-    "@babel/plugin-transform-flow-strip-types" "7.0.0-beta.36"
 
 "@babel/preset-stage-0@^7.0.0-beta.36":
   version "7.0.0-beta.36"
@@ -2815,12 +2799,6 @@ duplexer2@0.0.2:
   dependencies:
     readable-stream "~1.1.9"
 
-duplexer2@~0.1.0:
-  version "0.1.4"
-  resolved "https://registry.yarnpkg.com/duplexer2/-/duplexer2-0.1.4.tgz#8b12dab878c0d69e3e7891051662a32fc6bddcc1"
-  dependencies:
-    readable-stream "^2.0.2"
-
 duplexer3@^0.1.4:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/duplexer3/-/duplexer3-0.1.4.tgz#ee01dd1cac0ed3cbc7fdbea37dc0a8f1ce002ce2"
@@ -2987,12 +2965,6 @@ eslint-module-utils@^2.1.1:
   dependencies:
     debug "^2.6.8"
     pkg-dir "^1.0.0"
-
-eslint-plugin-flowtype@^2.40.1:
-  version "2.40.1"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-flowtype/-/eslint-plugin-flowtype-2.40.1.tgz#f78a8e6a4cc6da831dd541eb61e803ff0279b796"
-  dependencies:
-    lodash "^4.15.0"
 
 eslint-plugin-import@^2.8.0:
   version "2.8.0"
@@ -3443,10 +3415,6 @@ flat-cache@^1.2.1:
     del "^2.0.2"
     graceful-fs "^4.1.2"
     write "^0.2.1"
-
-flow-bin@^0.62.0:
-  version "0.62.0"
-  resolved "https://registry.yarnpkg.com/flow-bin/-/flow-bin-0.62.0.tgz#14bca669a6e3f95c0bc0c2d1eb55ec4e98cb1d83"
 
 flush-write-stream@^1.0.0:
   version "1.0.2"
@@ -5285,7 +5253,7 @@ lodash.zip@^4.2.0:
   version "4.2.0"
   resolved "https://registry.yarnpkg.com/lodash.zip/-/lodash.zip-4.2.0.tgz#ec6662e4896408ed4ab6c542a3990b72cc080020"
 
-lodash@^4.13.1, lodash@^4.14.0, lodash@^4.15.0, lodash@^4.17.4, lodash@^4.2.0, lodash@^4.2.1, lodash@^4.3.0:
+lodash@^4.13.1, lodash@^4.14.0, lodash@^4.17.4, lodash@^4.2.0, lodash@^4.2.1, lodash@^4.3.0:
   version "4.17.4"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.4.tgz#78203a4d1c328ae1d86dca6460e369b57f4055ae"
 
@@ -7066,13 +7034,6 @@ static-extend@^0.1.1:
 stealthy-require@^1.1.0:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/stealthy-require/-/stealthy-require-1.1.1.tgz#35b09875b4ff49f26a777e509b3090a3226bf24b"
-
-stream-combiner2@^1.1.1:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/stream-combiner2/-/stream-combiner2-1.1.1.tgz#fb4d8a1420ea362764e21ad4780397bebcb41cbe"
-  dependencies:
-    duplexer2 "~0.1.0"
-    readable-stream "^2.0.2"
 
 stream-each@^1.1.0:
   version "1.2.2"

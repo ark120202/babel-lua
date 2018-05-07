@@ -1,18 +1,17 @@
-/* @flow */
-
 import { types as bt } from '@babel/core';
 import * as t from 'lua-types';
 
-export function ExpressionStatement(node: Object) {
+export function ExpressionStatement(node) {
   if (bt.isCallExpression(node.expression)) return t.callStatement(this.transform(node.expression));
   // In most cases these are not identical, but it should be handled inside expressions
   return this.transform(node.expression);
 }
 
-function getIfClauses(node: Object, isInIfClause: boolean) {
+function getIfClauses(node, isInIfClause = false) {
   const clauses = [];
   const ifClause = isInIfClause ? t.elseifClause : t.ifClause;
   clauses.push(ifClause(this.transform(node.test), this.transformBlock(node.consequent)));
+
   const { alternate } = node;
   if (alternate) {
     if (bt.isIfStatement(alternate)) {
@@ -21,43 +20,44 @@ function getIfClauses(node: Object, isInIfClause: boolean) {
       clauses.push(t.elseClause(this.transformBlock(alternate)));
     }
   }
+
   return clauses;
 }
 
-export function IfStatement(node: Object) {
-  return t.ifStatement(getIfClauses.call(this, node, false));
+export function IfStatement(node) {
+  return t.ifStatement(getIfClauses.call(this, node));
 }
 
-export function ReturnStatement(node: Object) {
+export function ReturnStatement(node) {
   return t.returnStatement([this.transform(node.argument)]);
 }
 
-export function WhileStatement(node: Object) {
+export function WhileStatement(node) {
   return t.whileStatement(this.transform(node.test), this.transformBlock(node.body));
 }
 
-export function DoWhileStatement(node: Object) {
+export function DoWhileStatement(node) {
   return t.repeatStatement(
     this.transform(bt.unaryExpression('!', node.test)),
     this.transformBlock(node.body),
   );
 }
 
-export function ThrowStatement(node: Object) {
+export function ThrowStatement(node) {
   return t.callStatement(t.callExpression(t.identifier('error'), [this.transform(node.argument)]));
 }
 
-export function VariableDeclaration(node: Object) {
+export function VariableDeclaration(node) {
   // In JS let and const scoping are like local in Lua, but there is no alternative for var.
   // TODO: Make a plugin to fix scope or prohibit var use at all.
   return this.transformList(node.declarations);
 }
 
-export function VariableDeclarator(node: Object) {
+export function VariableDeclarator(node) {
   return t.localStatement([this.transform(node.id)], [this.transform(node.init)]);
 }
 
-function extractNumericFor(node: Object) {
+function extractNumericFor(node) {
   if (!node.init || !node.test || !node.update) return null;
   let variable;
   let start;
@@ -122,7 +122,7 @@ function extractNumericFor(node: Object) {
   };
 }
 
-export function ForStatement(node: Object) {
+export function ForStatement(node) {
   // Simplify typical `for (var i = 0; i < 10; i++)` case
   const numericResult = extractNumericFor(node);
   if (numericResult) {
@@ -144,7 +144,7 @@ export function ForStatement(node: Object) {
   ];
 }
 
-export function ForInStatement(node: Object) {
+export function ForInStatement(node) {
   const variable = bt.isVariableDeclaration(node.left)
     ? this.transform(node.left.declarations[0].id)
     : this.transform(node.left);
@@ -156,7 +156,7 @@ export function ForInStatement(node: Object) {
   );
 }
 
-export function ForOfStatement(node: Object) {
+export function ForOfStatement(node) {
   const variable = bt.isVariableDeclaration(node.left)
     ? this.transform(node.left.declarations[0].id)
     : this.transform(node.left);

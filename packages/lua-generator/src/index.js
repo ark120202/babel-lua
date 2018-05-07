@@ -1,14 +1,7 @@
-/* @flow */
-
 import SourceMap from './source-map';
-import Printer, { type Format } from './printer';
+import Printer from './printer';
 
-interface GeneratorOptions extends Format {
-  compact: boolean | 'auto';
-  sourceMaps?: boolean;
-}
-
-function normalizeOptions(code: string, opts: GeneratorOptions): Format {
+function normalizeOptions(code, opts) {
   const format = {
     retainLines: opts.retainLines,
     compact: opts.compact,
@@ -39,11 +32,7 @@ function normalizeOptions(code: string, opts: GeneratorOptions): Format {
   return format;
 }
 
-export default function generate(
-  ast: Object,
-  opts: GeneratorOptions = {},
-  code?: string | { [string]: string },
-) {
+export default function generate(ast, opts = {}, code) {
   const format = normalizeOptions(
     typeof code === 'string' ? code : Object.values(code).join(''),
     opts,

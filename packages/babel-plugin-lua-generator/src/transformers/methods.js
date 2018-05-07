@@ -1,10 +1,8 @@
-/* @flow */
-
 import { types as bt } from '@babel/core';
 import * as t from 'lua-types';
 
-function functionFactory(isExp: boolean) {
-  return function FunctionHandler(node: Object) {
+function functionFactory(isExp) {
+  return function FunctionHandler(node) {
     const body = this.transformBlock(node.body);
     const restParam = node.params.find(param => bt.isRestElement(param));
     if (restParam) {

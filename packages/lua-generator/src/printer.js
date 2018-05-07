@@ -9,23 +9,10 @@ import * as n from './node';
 import CodeBuffer from './buffer';
 
 import * as generatorFunctions from './generators';
-import type SourceMap from './source-map';
 
 const SCIENTIFIC_NOTATION = /e/i;
 const ZERO_DECIMAL_INTEGER = /\.0+$/;
 const NON_DECIMAL_LITERAL = /^0[box]/;
-
-export interface Format {
-  retainLines: boolean;
-  compact: boolean;
-  minified: boolean;
-  quotes: 'single' | 'double';
-  concise: boolean;
-  indent: {
-    style: string,
-    base: number,
-  };
-}
 
 function commaSeparator() {
   this.token(',');
@@ -33,18 +20,17 @@ function commaSeparator() {
 }
 
 export default class Printer {
-  constructor(format: Format, map: SourceMap) {
+  constructor(format, map) {
     this.format = format;
     this._buf = new CodeBuffer(map);
   }
 
-  format: Format;
-  inForStatementInitCounter: number = 0;
+  inForStatementInitCounter = 0;
 
-  _buf: Buffer;
-  _printStack: Array<t.Node> = [];
-  _indent: number = 0;
-  _noLineTerminator: boolean = false;
+  _buf;
+  _printStack = [];
+  _indent = 0;
+  _noLineTerminator = false;
   _endsWithInteger = false;
   _endsWithWord = false;
   _endsWithCallStatement = false;
@@ -59,7 +45,7 @@ export default class Printer {
    * Increment indent size.
    */
 
-  indent(): void {
+  indent() {
     if (this.format.compact || this.format.concise) return;
 
     this._indent += 1;
@@ -69,7 +55,7 @@ export default class Printer {
    * Decrement indent size.
    */
 
-  dedent(): void {
+  dedent() {
     if (this.format.compact || this.format.concise) return;
 
     this._indent -= 1;
@@ -79,7 +65,7 @@ export default class Printer {
    * Add a semicolon to the buffer.
    */
 
-  semicolon(force: boolean = false): void {
+  semicolon(force = false) {
     if (force || ((this.format.compact || this.format.concise) && !this.endsWith('\n'))) {
       this._append(';', !force);
       this._endsWithCallStatement = false;
@@ -94,7 +80,7 @@ export default class Printer {
    * End block with word.
    */
 
-  endBlock(str = 'end'): void {
+  endBlock(str = 'end') {
     if (this.format.minified) {
       this._buf.removeLastSemicolon();
     }
@@ -105,7 +91,7 @@ export default class Printer {
    * Add a space to the buffer unless it is compact.
    */
 
-  space(force: boolean = false): void {
+  space(force = false) {
     if (this.format.compact) return;
 
     if ((this._buf.hasContent() && !this.endsWith(' ') && !this.endsWith('\n')) || force) {
@@ -117,7 +103,7 @@ export default class Printer {
    * Writes a token that can't be safely parsed without taking whitespace into account.
    */
 
-  word(str: string): void {
+  word(str) {
     if (this._endsWithWord) this._space();
 
     this._append(str);
@@ -129,7 +115,7 @@ export default class Printer {
    * Writes a number token so that we can validate if it is an integer.
    */
 
-  number(str: string): void {
+  number(str) {
     this.word(str);
 
     // Integer tokens need special handling because they cannot have '.'s inserted
@@ -146,7 +132,7 @@ export default class Printer {
    * Writes a simple token.
    */
 
-  token(str: string): void {
+  token(str) {
     if (
       (str === '[[' && this.endsWith('--')) ||
       (str === '..' && this.endsWith('.')) ||
@@ -163,7 +149,7 @@ export default class Printer {
    * Add a newline (or many newlines), maintaining formatting.
    */
 
-  newline(i?: number): void {
+  newline(i = 1) {
     if (this.format.retainLines || this.format.compact) return;
 
     if (this.format.concise) {
@@ -174,8 +160,6 @@ export default class Printer {
     // never allow more than two lines
     if (this.endsWith('\n\n')) return;
 
-    if (typeof i !== 'number') i = 1;
-
     i = Math.min(2, i);
     if (this.endsWith('{\n') || this.endsWith(':\n')) i -= 1;
     if (i <= 0) return;
@@ -185,35 +169,35 @@ export default class Printer {
     }
   }
 
-  endsWith(str: string): boolean {
+  endsWith(str) {
     return this._buf.endsWith(str);
   }
 
-  removeTrailingNewline(): void {
+  removeTrailingNewline() {
     this._buf.removeTrailingNewline();
   }
 
-  source(prop: string, loc: Object): void {
+  source(prop, loc) {
     this._catchUp(prop, loc);
 
     this._buf.source(prop, loc);
   }
 
-  withSource(prop: string, loc: Object, cb: () => void): void {
+  withSource(prop, loc, cb) {
     this._catchUp(prop, loc);
 
     this._buf.withSource(prop, loc, cb);
   }
 
-  _space(): void {
-    this._append(' ', true /* queue */);
+  _space() {
+    this._append(' ', true);
   }
 
-  _newline(): void {
-    this._append('\n', true /* queue */);
+  _newline() {
+    this._append('\n', true);
   }
 
-  _append(str: string, queue: boolean = false) {
+  _append(str, queue = false) {
     this._maybeIndent(str);
 
     if (queue) this._buf.queue(str);
@@ -223,14 +207,14 @@ export default class Printer {
     this._endsWithInteger = false;
   }
 
-  _maybeIndent(str: string): void {
+  _maybeIndent(str) {
     // we've got a newline before us so prepend on the indentation
     if (this._indent && this.endsWith('\n') && str[0] !== '\n') {
       this._buf.queue(this._getIndent());
     }
   }
 
-  _catchUp(prop: string, loc: Object) {
+  _catchUp(prop, loc) {
     if (!this.format.retainLines) return;
 
     // catch up to this nodes newline if we're behind
@@ -248,7 +232,7 @@ export default class Printer {
    * Get the current indent.
    */
 
-  _getIndent(): string {
+  _getIndent() {
     return repeat(this.format.indent.style, this._indent);
   }
 
@@ -302,7 +286,7 @@ export default class Printer {
     return null;
   }
 
-  printJoin(nodes: ?Array, parent: Object, opts = {}) {
+  printJoin(nodes, parent, opts = {}) {
     if (!nodes || nodes.length === 0) return;
 
     if (opts.indent) this.indent();

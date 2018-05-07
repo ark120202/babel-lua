@@ -1,11 +1,7 @@
 import * as t from 'lua-types';
-import luaparse, { type LuaparseOptions } from 'luaparse';
+import luaparse from 'luaparse';
 
-interface LuaParseOptions extends LuaparseOptions {
-  filename: string;
-}
-
-export default function parse(input: string, options: LuaParseOptions = {}) {
+export default function parse(input, options = {}) {
   const onCreateNode = options.locations
     ? node => {
         if (node.loc) {

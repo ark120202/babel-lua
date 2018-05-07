@@ -3,14 +3,8 @@
  */
 
 import trimRight from 'trim-right';
-import type SourceMap from './source-map';
 
 const SPACES_RE = /^[ \t]+$/;
-
-type Location = {
-  column: number,
-  line: number,
-};
 
 /**
  * The Buffer class exists to manage the queue of tokens being pushed onto the output string
@@ -20,20 +14,20 @@ type Location = {
  */
 
 export default class CodeBuffer {
-  constructor(map: ?SourceMap) {
+  constructor(map) {
     this._map = map;
   }
 
-  _map: SourceMap = null;
-  _buf: Array = [];
-  _last: string = '';
-  _queue: Array = [];
+  _map = null;
+  _buf = [];
+  _last = '';
+  _queue = [];
 
-  _position: Object = {
+  _position = {
     line: 1,
     column: 0,
   };
-  _sourcePosition: Object = {
+  _sourcePosition = {
     identifierName: null,
     line: null,
     column: null,
@@ -44,7 +38,7 @@ export default class CodeBuffer {
    * Get the final string output from the buffer, along with the sourcemap if one exists.
    */
 
-  get(): Object {
+  get() {
     this._flush();
 
     const map = this._map;
@@ -79,7 +73,7 @@ export default class CodeBuffer {
    * Add a string to the buffer that cannot be reverted.
    */
 
-  append(str: string): void {
+  append(str) {
     this._flush();
     const { line, column, filename, identifierName } = this._sourcePosition;
     this._append(str, line, column, identifierName, filename);
@@ -89,7 +83,7 @@ export default class CodeBuffer {
    * Add a string to the buffer than can be reverted.
    */
 
-  queue(str: string): void {
+  queue(str) {
     // Drop trailing spaces when a newline is inserted.
     if (str === '\n') {
       while (this._queue.length > 0 && SPACES_RE.test(this._queue[0][0])) {
@@ -101,7 +95,7 @@ export default class CodeBuffer {
     this._queue.unshift([str, line, column, identifierName, filename]);
   }
 
-  _flush(): void {
+  _flush() {
     let item = this._queue.pop();
     while (item) {
       this._append(...item);
@@ -109,13 +103,7 @@ export default class CodeBuffer {
     }
   }
 
-  _append(
-    str: string,
-    line: number,
-    column: number,
-    identifierName: ?string,
-    filename: ?string,
-  ): void {
+  _append(str, line, column, identifierName, filename) {
     // If there the line is ending, adding a new mapping marker is redundant
     if (this._map && str[0] !== '\n') {
       this._map.mark(
@@ -141,19 +129,19 @@ export default class CodeBuffer {
     }
   }
 
-  removeTrailingNewline(): void {
+  removeTrailingNewline() {
     if (this._queue.length > 0 && this._queue[0][0] === '\n') {
       this._queue.shift();
     }
   }
 
-  removeLastSemicolon(): void {
+  removeLastSemicolon() {
     if (this._queue.length > 0 && this._queue[0][0] === ';') {
       this._queue.shift();
     }
   }
 
-  endsWith(suffix: string): boolean {
+  endsWith(suffix) {
     // Fast path to avoid iterating over this._queue.
     if (suffix.length === 1) {
       let last;
@@ -177,7 +165,7 @@ export default class CodeBuffer {
     return false;
   }
 
-  hasContent(): boolean {
+  hasContent() {
     return this._queue.length > 0 || !!this._last;
   }
 
@@ -186,7 +174,7 @@ export default class CodeBuffer {
    * will be given this position in the sourcemap.
    */
 
-  source(prop: string, loc: Location): void {
+  source(prop, loc) {
     if (prop && !loc) return;
 
     const pos = loc ? loc[prop] : null;
@@ -201,7 +189,7 @@ export default class CodeBuffer {
    * Call a callback with a specific source location and restore on completion.
    */
 
-  withSource(prop: string, loc: Location, cb: () => void): void {
+  withSource(prop, loc, cb) {
     if (!this._map) return cb();
 
     // Use the call stack to manage a stack of "source location" data.
@@ -222,14 +210,14 @@ export default class CodeBuffer {
     return null;
   }
 
-  getCurrentColumn(): number {
+  getCurrentColumn() {
     const extra = this._queue.reduce((acc, item) => item[0] + acc, '');
     const lastIndex = extra.lastIndexOf('\n');
 
     return lastIndex === -1 ? this._position.column + extra.length : extra.length - 1 - lastIndex;
   }
 
-  getCurrentLine(): number {
+  getCurrentLine() {
     const extra = this._queue.reduce((acc, item) => item[0] + acc, '');
 
     let count = 0;

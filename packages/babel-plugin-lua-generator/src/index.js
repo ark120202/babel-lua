@@ -1,15 +1,15 @@
-import { type LuaNode } from 'lua-types';
 import generate from 'lua-generator';
 import transform from './transform';
 
 export default function() {
   return {
-    generatorOverride(ast: LuaNode, options: Object, code: string): { code: string } {
+    generatorOverride(ast, options, code) {
       const luaAst = transform(ast);
       if (Array.isArray(luaAst)) throw new Error('Unexpected array as transformation result');
       const lua = generate(luaAst, options, code);
       return lua;
     },
+
     visitor: {
       'BindingIdentifier|ReferencedIdentifier': function BRIdentifier(path) {
         // see ForOfStatement

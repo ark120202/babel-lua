@@ -1,5 +1,3 @@
-/* @flow */
-
 export * from './expressions';
 export * from './statements';
 export * from './methods';

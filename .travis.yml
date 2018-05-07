@@ -18,7 +18,6 @@ after_success:
 
 stages:
   - lint
-  - flow
   - test
 #  - name: publish
 #    if: repo = ark120202/babel-lua
@@ -30,9 +29,6 @@ jobs:
     - stage: lint
       node_js: '10'
       script: yarn lint
-    - stage: flow
-      node_js: '10'
-      script: yarn flow
 #    - stage: publish
 #      node_js: '8'
 #      script: 'echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc'

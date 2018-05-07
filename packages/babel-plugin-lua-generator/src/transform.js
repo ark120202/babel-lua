@@ -1,13 +1,8 @@
-/* @flow */
-
 import * as _ from 'lodash';
-import * as t from 'lua-types';
 import * as transformers from './transformers';
 
 class Transformer {
-  _parent: Object;
-
-  transform(node: Object, parent?: Object): t.LuaNode | t.LuaNode[] {
+  transform(node, parent) {
     if (node == null) return node;
     const { type } = node;
 
@@ -29,7 +24,7 @@ class Transformer {
     return transformedNode;
   }
 
-  _reattachShared(transformedNode: t.LuaNode, node: Object) {
+  _reattachShared(transformedNode, node) {
     if (Array.isArray(transformedNode)) {
       transformedNode.forEach(n => {
         n.loc = node.loc;
@@ -59,6 +54,6 @@ class Transformer {
   }
 }
 
-export default function transform(ast: t.LuaNode) {
+export default function transform(ast) {
   return new Transformer().transform(ast);
 }

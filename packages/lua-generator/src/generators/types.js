@@ -1,10 +1,8 @@
-/* @flow */
-
-export function Identifier(node: Object) {
+export function Identifier(node) {
   this.word(node.name);
 }
 
-export function TableKey(node: any) {
+export function TableKey(node) {
   this.token('[');
   this.print(node.key, node);
   this.token(']');
@@ -14,7 +12,7 @@ export function TableKey(node: any) {
   this.print(node.value, node);
 }
 
-export function TableKeyString(node: any) {
+export function TableKeyString(node) {
   this.print(node.key, node);
   this.space();
   this.token('=');
@@ -22,11 +20,11 @@ export function TableKeyString(node: any) {
   this.print(node.value, node);
 }
 
-export function TableValue(node: Object) {
+export function TableValue(node) {
   this.print(node.value);
 }
 
-export function TableConstructorExpression(node: Object) {
+export function TableConstructorExpression(node) {
   const { fields } = node;
   this.token('{');
   if (fields.length > 0) {
@@ -37,7 +35,7 @@ export function TableConstructorExpression(node: Object) {
   this.token('}');
 }
 
-export function BooleanLiteral(node: Object) {
+export function BooleanLiteral(node) {
   this.word(node.value ? 'true' : 'false');
 }
 
@@ -45,7 +43,7 @@ export function NilLiteral() {
   this.word('nil');
 }
 
-export function NumericLiteral(node: any) {
+export function NumericLiteral(node) {
   const raw = this.getPossibleRaw(node);
   const value = String(node.value);
   if (raw == null) {
@@ -57,7 +55,7 @@ export function NumericLiteral(node: any) {
   }
 }
 
-export function StringLiteral(node: any) {
+export function StringLiteral(node) {
   const raw = this.getPossibleRaw(node);
   if (!this.format.minified && raw != null) {
     this.token(raw);

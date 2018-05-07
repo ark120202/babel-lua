@@ -1,10 +1,8 @@
-/* @flow */
-
 import gulp from 'gulp';
 import babel from 'gulp-babel';
 import path from 'path';
 import del from 'del';
-import combiner from 'stream-combiner2';
+import mergeStream from 'merge-stream';
 import through from 'through2';
 
 function replaceSrcWithLib(file, enc, callback) {
@@ -18,7 +16,7 @@ gulp.task('build', () => {
   const dest = path.join(__dirname, 'packages');
   const since = { since: gulp.lastRun('build') };
 
-  return combiner([
+  return mergeStream([
     gulp
       .src(path.join(src, '*.js'), since)
       .pipe(through.obj(replaceSrcWithLib))

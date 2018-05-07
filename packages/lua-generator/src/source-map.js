@@ -7,9 +7,8 @@ import sourceMap from 'source-map';
 /**
  * Build a sourcemap.
  */
-
 export default class SourceMap {
-  constructor(opts, code: string | { [string]: string }) {
+  constructor(opts, code) {
     this._cachedMap = null;
     this._code = code;
     this._opts = opts;
@@ -19,7 +18,6 @@ export default class SourceMap {
   /**
    * Get the sourcemap.
    */
-
   get() {
     if (!this._cachedMap) {
       const map = new sourceMap.SourceMapGenerator({
@@ -52,15 +50,7 @@ export default class SourceMap {
    * Mark the current generated position with a source position. May also be passed null line/column
    * values to insert a mapping to nothing.
    */
-
-  mark(
-    generatedLine: number,
-    generatedColumn: number,
-    line: number,
-    column: number,
-    identifierName: ?string,
-    filename: ?string,
-  ) {
+  mark(generatedLine, generatedColumn, line, column, identifierName, filename) {
     // Adding an empty mapping at the start of a generated line just clutters the map.
     if (this._lastGenLine !== generatedLine && line === null) return;
 

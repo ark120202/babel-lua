@@ -1,4 +1,4 @@
-const RESERVED_WORDS_LUA: Set<string> = new Set([
+const RESERVED_WORDS_LUA = new Set([
   'and',
   'break',
   'do',

@@ -1,12 +1,10 @@
-/* @flow */
-
-export function DoStatement(node: Object) {
+export function DoStatement(node) {
   this.word('do');
   this.printBlock(node);
   this.endBlock();
 }
 
-export function WhileStatement(node: Object) {
+export function WhileStatement(node) {
   this.word('while');
   this.space();
   this.print(node.condition);
@@ -16,7 +14,7 @@ export function WhileStatement(node: Object) {
   this.endBlock();
 }
 
-export function RepeatStatement(node: Object) {
+export function RepeatStatement(node) {
   this.word('repeat');
   this.printBlock(node);
   this.word('until');
@@ -24,7 +22,7 @@ export function RepeatStatement(node: Object) {
   this.print(node.condition);
 }
 
-export function ForGenericStatement(node: Object) {
+export function ForGenericStatement(node) {
   this.word('for');
   this.space();
   this.printList(node.variables, node);
@@ -38,7 +36,7 @@ export function ForGenericStatement(node: Object) {
   this.endBlock();
 }
 
-export function ForNumericStatement(node: Object) {
+export function ForNumericStatement(node) {
   this.word('for');
   this.space();
   this.print(node.variable);

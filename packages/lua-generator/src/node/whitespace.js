@@ -1,11 +1,6 @@
-type WhitespaceObject = {
-  before?: boolean,
-  after?: boolean,
-};
-
 export const nodes = {};
 
-function TableKey(node: Object, parent): ?WhitespaceObject {
+function TableKey(node, parent) {
   if (parent.fields[0] === node) {
     return {
       before: true,

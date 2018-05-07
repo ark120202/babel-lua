@@ -1,5 +1,3 @@
-/* @flow */
-
 import * as t from 'lua-types';
 
 // https://www.lua.org/manual/5.3/manual.html#3.4.8
@@ -31,7 +29,7 @@ const PRECEDENCE = {
   '^': 11,
 };
 
-function Binary(node: Object, parent: Object): boolean {
+function Binary(node, parent) {
   if (t.isCallExpression(parent) || (t.isIndexExpression(parent) && parent.identifier === node)) {
     return false;
   }
@@ -65,10 +63,10 @@ function Binary(node: Object, parent: Object): boolean {
 
 export { Binary as LogicalExpression, Binary as BinaryExpression, Binary as UnaryExpression };
 
-export function FunctionDeclaration(node: Object, parent: Object) {
+export function FunctionDeclaration(node, parent) {
   return t.isCallExpression(parent) && parent.base === node;
 }
 
-export function TableConstructorExpression(node: Object, parent: Object) {
+export function TableConstructorExpression(node, parent) {
   return t.isIndexExpression(parent) && parent.base === node;
 }

@@ -1,11 +1,9 @@
-/* @flow */
-
-export function IfStatement(node: Object) {
+export function IfStatement(node) {
   this.printSequence(node.clauses, node);
   this.endBlock();
 }
 
-export function IfClause(node: Object) {
+export function IfClause(node) {
   this.word('if');
   this.space();
   this.print(node.condition, node);
@@ -16,7 +14,7 @@ export function IfClause(node: Object) {
   if (this.format.minified) this._buf.removeLastSemicolon();
 }
 
-export function ElseifClause(node: Object) {
+export function ElseifClause(node) {
   this.word('elseif');
   this.space();
   this.print(node.condition, node);
@@ -27,7 +25,7 @@ export function ElseifClause(node: Object) {
   if (this.format.minified) this._buf.removeLastSemicolon();
 }
 
-export function ElseClause(node: Object) {
+export function ElseClause(node) {
   this.word('else');
   this.printBlock(node);
   this.removeTrailingNewline();

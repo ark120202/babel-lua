@@ -1,5 +1,3 @@
-/* @flow */
-
 import luaParse from 'lua-parse';
 import fs from 'fs-extra';
 import path from 'path';

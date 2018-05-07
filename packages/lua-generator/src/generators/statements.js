@@ -1,14 +1,12 @@
-/* @flow */
-
-export function LuaRaw(node: Object) {
+export function LuaRaw(node) {
   this._append(node.code);
 }
 
-export function Chunk(node: Object) {
+export function Chunk(node) {
   this.printSequence(node.body, node);
 }
 
-export function FunctionDeclaration(node: Object) {
+export function FunctionDeclaration(node) {
   if (node.isLocal) {
     this.word('local');
     this.space();
@@ -25,7 +23,7 @@ export function FunctionDeclaration(node: Object) {
   this.endBlock();
 }
 
-export function LocalStatement(node: Object) {
+export function LocalStatement(node) {
   this.word('local');
   this.space();
   this.printList(node.variables, node);
@@ -39,7 +37,7 @@ export function LocalStatement(node: Object) {
   this.semicolon();
 }
 
-export function AssignmentStatement(node: Object) {
+export function AssignmentStatement(node) {
   this.printList(node.variables, node);
   if (node.init.length > 0) {
     this.space();
@@ -55,14 +53,14 @@ export function BreakStatement() {
   this.semicolon();
 }
 
-export function ReturnStatement(node: Object) {
+export function ReturnStatement(node) {
   this.word('return');
   this.space();
   this.printList(node.arguments, node);
   this.semicolon();
 }
 
-export function CallStatement(node: Object) {
+export function CallStatement(node) {
   this.print(node.expression, node);
   this.semicolon();
 }

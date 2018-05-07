@@ -1,14 +1,12 @@
-/* @flow */
-
 import { types as bt } from '@babel/core';
 import * as t from 'lua-types';
 
-export function BinaryExpression(node: Object) {
+export function BinaryExpression(node) {
   const operator = node.operator === '===' ? '==' : node.operator;
   return t.binaryExpression(operator, this.transform(node.left), this.transform(node.right));
 }
 
-export function LogicalExpression(node: Object) {
+export function LogicalExpression(node) {
   if (node.operator !== '&&' && node.operator !== '||') {
     // FIXME: Use path.buildCodeFrameError
     throw new Error(`${node.operator} is unsupported logical operator`);
@@ -17,7 +15,7 @@ export function LogicalExpression(node: Object) {
   return t.binaryExpression(operator, this.transform(node.left), this.transform(node.right));
 }
 
-export function AssignmentExpression(node: Object, parent: Object) {
+export function AssignmentExpression(node, parent) {
   if (!bt.isExpressionStatement(parent)) {
     // FIXME: Use path.buildCodeFrameError
     throw new Error("AssignmentExpression's not in ExpressionStatement's are not supported.");
@@ -43,7 +41,7 @@ export function AssignmentExpression(node: Object, parent: Object) {
   }
 }
 
-export function UpdateExpression(node: Object, parent: Object) {
+export function UpdateExpression(node, parent) {
   if (!bt.isExpressionStatement(parent)) {
     // FIXME: Use path.buildCodeFrameError
     throw new Error("AssignmentExpression's not in ExpressionStatement's are not supported.");
@@ -62,7 +60,7 @@ export function UpdateExpression(node: Object, parent: Object) {
   );
 }
 
-export function UnaryExpression(node: Object) {
+export function UnaryExpression(node) {
   switch (node.operator) {
     case 'void':
       return t.binaryExpression('and', this.transform(node.argument), t.nilLiteral());
@@ -81,7 +79,7 @@ export function UnaryExpression(node: Object) {
   }
 }
 
-export function CallExpression(node: Object) {
+export function CallExpression(node) {
   if (bt.isIdentifier(node.callee, { name: '__lua' }) && node.arguments.length === 1) {
     const argument = node.arguments[0];
     // TODO: Use path.evaluate, ref: https://github.com/babel/babel/blob/6.x/packages/babel-plugin-transform-eval/src/index.js
@@ -93,7 +91,7 @@ export function CallExpression(node: Object) {
   return t.callExpression(this.transform(node.callee), this.transformList(node.arguments));
 }
 
-export function MemberExpression(node: Object, parent: Object) {
+export function MemberExpression(node, parent) {
   if (node.computed) {
     return t.indexExpression(this.transform(node.object), this.transform(node.property));
   }
@@ -103,20 +101,20 @@ export function MemberExpression(node: Object, parent: Object) {
   return t.memberExpression(this.transform(node.object), indexer, this.transform(node.property));
 }
 
-export function ObjectExpression(node: Object) {
+export function ObjectExpression(node) {
   return t.tableConstructorExpression(this.transformList(node.properties));
 }
 
-export function ObjectProperty(node: Object) {
+export function ObjectProperty(node) {
   const constructor = node.computed || bt.isLiteral(node.key) ? t.tableKey : t.tableKeyString;
   return constructor(this.transform(node.key), this.transform(node.value));
 }
 
-export function ArrayExpression(node: Object) {
+export function ArrayExpression(node) {
   return t.tableConstructorExpression(this.transformList(node.elements).map(n => t.tableValue(n)));
 }
 
-export function SequenceExpression(node: Object) {
+export function SequenceExpression(node) {
   return t.indexExpression(
     t.tableConstructorExpression(this.transformList(node.expressions).map(n => t.tableValue(n))),
     t.numericLiteral(node.expressions.length),

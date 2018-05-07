@@ -1,7 +1,6 @@
-/* @flow */
 import * as n from '../node';
 
-function AssignmentExpression(node: Object, parent: Object) {
+function AssignmentExpression(node, parent) {
   const parens =
     this.inForStatementInitCounter && node.operator === 'in' && !n.needsParens(node, parent);
   if (parens) this.token('(');
@@ -21,7 +20,7 @@ function AssignmentExpression(node: Object, parent: Object) {
 
 export { AssignmentExpression as BinaryExpression, AssignmentExpression as LogicalExpression };
 
-export function UnaryExpression(node: Object) {
+export function UnaryExpression(node) {
   if (node.operator === 'not') {
     this.word(node.operator);
     this.space();
@@ -31,20 +30,20 @@ export function UnaryExpression(node: Object) {
   this.print(node.argument, node);
 }
 
-export function MemberExpression(node: Object) {
+export function MemberExpression(node) {
   this.print(node.base, node);
   this.token(node.indexer);
   this.print(node.identifier, node);
 }
 
-export function IndexExpression(node: Object) {
+export function IndexExpression(node) {
   this.print(node.base, node);
   this.token('[');
   this.print(node.index, node);
   this.token(']');
 }
 
-export function CallExpression(node: Object) {
+export function CallExpression(node) {
   this.print(node.base, node);
 
   this.token('(');
@@ -52,13 +51,13 @@ export function CallExpression(node: Object) {
   this.token(')');
 }
 
-export function TableCallExpression(node: Object) {
+export function TableCallExpression(node) {
   this.print(node.base, node);
   this.space();
   this.print(node.arguments, node);
 }
 
-export function StringCallExpression(node: Object) {
+export function StringCallExpression(node) {
   this.print(node.base, node);
   this.space();
   this.print(node.argument, node);
