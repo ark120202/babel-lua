@@ -2,7 +2,7 @@ import { types as t } from '@babel/core';
 
 const NO_WRAP = Symbol('no wrap');
 
-export default function() {
+export default function () {
   return {
     visitor: {
       CallExpression(path) {
@@ -11,8 +11,12 @@ export default function() {
         const calleePath = path.get('callee');
 
         if (calleePath.isIdentifier()) {
-          // Don't wrap helpers and require
-          if (!calleePath.node[Symbol.for('helper')] && calleePath.node.name !== 'require') {
+          // Don't wrap helpers, require and functions without arguments
+          if (
+            !calleePath.node[Symbol.for('helper')] &&
+            calleePath.node.name !== 'require' &&
+            path.node.arguments.length > 0
+          ) {
             path.node.callee = t.memberExpression(calleePath.node, t.identifier('call'));
             path.node.arguments.unshift(t.nullLiteral());
           }
