@@ -19,7 +19,12 @@ function normalizeOptions(code, opts) {
   }
 
   if (format.compact === 'auto') {
-    format.compact = code.length > 500_000; // 500KB
+    let codeLength = 0;
+    if (code != null) {
+      codeLength = typeof code === 'string' ? code.length : Object.values(code).join('').length;
+    }
+
+    format.compact = codeLength > 500_000; // 500KB
 
     if (format.compact) {
       console.error(
@@ -33,10 +38,7 @@ function normalizeOptions(code, opts) {
 }
 
 export default function generate(ast, opts = {}, code) {
-  const format = normalizeOptions(
-    typeof code === 'string' ? code : Object.values(code).join(''),
-    opts,
-  );
+  const format = normalizeOptions(code, opts);
   const map = opts.sourceMaps ? new SourceMap(opts, code) : null;
   const printer = new Printer(format, map);
 
