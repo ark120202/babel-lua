@@ -1,3 +1,7 @@
+function foo() {
+  this.bar();
+}
+
 function foo(a) {
   return a;
 }

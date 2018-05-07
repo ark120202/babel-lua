@@ -1,7 +1,10 @@
-const foo = babelHelpers.markFunction(function (_this, a) {
+const foo = babelHelpers.markFunction(function (this) {
+  this.bar();
+});
+const foo = babelHelpers.markFunction(function (this, a) {
   return a;
 });
-const foo = babelHelpers.markFunction(function (_this2, a) {
+const foo = babelHelpers.markFunction(function (this, a) {
   return a;
 });
 const foo = babelHelpers.markFunction(function (_, a) {

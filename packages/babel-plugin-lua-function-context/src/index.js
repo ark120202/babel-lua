@@ -97,9 +97,7 @@ export default function() {
           return;
         }
 
-        const ctx = path.scope.generateUidIdentifier(isArrow ? '_' : 'this');
-        node.params.unshift(ctx);
-        if (!isArrow) path.scope.rename('this', ctx.name);
+        node.params.unshift(isArrow ? path.scope.generateUidIdentifier('_') : t.thisExpression());
 
         const call = t.callExpression(helper, [t.cloneNode(node)]);
         path.replaceWith(call);
