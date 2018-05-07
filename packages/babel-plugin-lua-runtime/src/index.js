@@ -1,7 +1,7 @@
 import { addDefault, isModule } from '@babel/helper-module-imports';
 import { types as t } from '@babel/core';
 
-import definitions from './definitions';
+import { builtins } from './definitions';
 
 const HEADER_HELPERS = ['interopRequireWildcard', 'interopRequireDefault'];
 
@@ -54,19 +54,14 @@ export default function(api, options) {
 
         // ARRAY.from is ok, array.FROM is not
         if (t.isMemberExpression(parent) && parent.object !== node) return;
-        if (definitions.builtins[node.name] == null) return;
+        if (!builtins.has(node.name)) return;
         if (scope.getBindingIdentifier(node.name)) return;
 
         // Symbol() -> _core.Symbol(); new Promise -> new _core.Promise
         path.replaceWith(
-          this.addDefaultImport(
-            `${moduleName}/builtins/${definitions.builtins[node.name]}`,
-            node.name,
-          ),
+          this.addDefaultImport(`${moduleName}/builtins/${builtins.get(node.name)}`, node.name),
         );
       },
     },
   };
 }
-
-export { definitions };
