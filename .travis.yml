@@ -2,7 +2,9 @@ git:
   depth: 10
 language: node_js
 cache: yarn
-node_js: 8
+node_js:
+  - '10'
+  - '8'
 
 before_script:
   - yarn bootstrap
@@ -26,10 +28,10 @@ stages:
 jobs:
   include:
     - stage: lint
-      node_js: 8
+      node_js: '10'
       script: yarn lint
     - stage: flow
-      node_js: 8
+      node_js: '10'
       script: yarn flow
 #    - stage: publish
 #      node_js: '8'
