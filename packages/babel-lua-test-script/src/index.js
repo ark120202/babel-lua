@@ -13,7 +13,6 @@ jest.setTimeout(25000);
 
 function testRunner(dir) {
   const pkgDir = path.join(dir, '../');
-  const packagesDir = path.join(pkgDir, '../');
   const packageJson = JSON.parse(fs.readFileSync(path.join(pkgDir, 'package.json')));
   const pkgName = packageJson.name;
 
