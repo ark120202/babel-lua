@@ -4,9 +4,6 @@ const foo = babelHelpers.markFunction(function (this) {
 const foo = babelHelpers.markFunction(function (this, a) {
   return a;
 });
-const foo = babelHelpers.markFunction(function (this, a) {
-  return a;
-});
 const foo = babelHelpers.markFunction(function (_, a) {
   return a;
 });

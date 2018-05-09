@@ -1,4 +1,5 @@
 import { types as t } from '@babel/core';
+import splitExportDeclaration from '@babel/helper-split-export-declaration';
 
 const NO_MARK = Symbol('no mark');
 const NO_WRAP = Symbol('no wrap');
@@ -56,6 +57,11 @@ export default function() {
             path.replaceWith(iife);
           }
         }
+      },
+
+      ExportDefaultDeclaration(path) {
+        if (!path.get('declaration').isFunctionDeclaration()) return;
+        splitExportDeclaration(path);
       },
 
       FunctionDeclaration(path) {
