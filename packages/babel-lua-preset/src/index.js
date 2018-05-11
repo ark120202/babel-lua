@@ -12,7 +12,6 @@ import transformES2015Destructuring from '@babel/plugin-transform-destructuring'
 // import transformES2015BlockScoping from '@babel/plugin-transform-block-scoping';
 
 import luaGenerator from 'babel-plugin-lua-generator';
-import luaModuleResolver from 'babel-plugin-lua-module-resolver';
 import luaParameters from 'babel-plugin-lua-parameters';
 import luaReservedWords from 'babel-plugin-lua-reserved-words';
 import luaRuntime from 'babel-plugin-lua-runtime';
@@ -25,7 +24,6 @@ import luaModules from 'babel-plugin-lua-modules';
 export default function(api, opts = {}) {
   const loose = opts.loose || false;
   const spec = opts.spec || false;
-  const { luaRoot } = opts;
 
   if (typeof loose !== 'boolean') {
     throw new TypeError("Preset lua 'loose' option must be a boolean.");
@@ -53,7 +51,6 @@ export default function(api, opts = {}) {
       // transformES2015BlockScoping,
 
       luaGenerator,
-      [luaModuleResolver, { luaRoot }],
       luaParameters,
       luaReservedWords,
       luaRuntime,

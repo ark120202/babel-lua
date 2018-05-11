@@ -1,21 +1,19 @@
 {
-  "name": "babel-plugin-lua-module-resolver",
+  "name": "babel-lua-module-resolver",
   "version": "1.0.0",
   "description": "Resolve require calls to make relative paths to lua root.",
   "keywords": [
-    "babel-lua",
-    "babel-plugin"
+    "babel-lua"
   ],
   "homepage": "https://github.com/ark120202/babel-lua#readme",
   "bugs": "https://github.com/ark120202/babel-lua/issues",
-  "repository": "https://github.com/ark120202/babel-lua/tree/master/packages/babel-plugin-lua-module-resolver",
+  "repository": "https://github.com/ark120202/babel-lua/tree/master/packages/babel-lua-module-resolver",
   "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "author": "ark120202",
   "license": "MIT",
   "dependencies": {
-    "babel-plugin-module-resolver": "^3.1.1"
-  },
-  "devDependencies": {
-    "babel-lua-test-script": "^1.0.0"
+    "enhanced-resolve": "^4.0.0",
+    "upath": "^1.0.5"
   }
 }
