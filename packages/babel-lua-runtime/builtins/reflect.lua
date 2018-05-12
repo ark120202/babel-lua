@@ -1,17 +1,10 @@
 _G.Reflect = {}
 
 function Reflect:__iif(condition, t, f)
-  local value
   if condition then
-    value = t
+    return t
   else
-    value = f
-  end
-
-  if type(value) == "function" then
-    return value()
-  else
-    return value
+    return f
   end
 end
 
