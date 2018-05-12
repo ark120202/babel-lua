@@ -14,10 +14,12 @@ export function findImports(code) {
 }
 
 export function replaceImports(code, replacer) {
-  return code.replace(
-    REQUIRE_REGEXP,
-    (_, m1, m2, m3, m4) => `require("${replacer(m4 || m3 || m2 || m1)}")`,
-  );
+  return code.replace(REQUIRE_REGEXP, (source, m1, m2, m3, m4) => {
+    const replacement = replacer(m4 || m3 || m2 || m1);
+    return replacement instanceof Error
+      ? `--[[ ${source} ]] error(${JSON.stringify(replacement.message)})`
+      : `require("${replacement}")`;
+  });
 }
 
 export class LuaModuleResolverPlugin {

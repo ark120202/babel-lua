@@ -37,6 +37,12 @@ describe('replaceImports', () => {
     const result = `require("module2");  require("another_module2")`;
     expect(replaceImports(source, m => `${m}2`)).toBe(result);
   });
+
+  test('should support errors', () => {
+    const source = `require("module")`;
+    const result = `--[[ require("module") ]] error("Couldn't resolve module \\"module\\"")`;
+    expect(replaceImports(source, m => new Error(`Couldn't resolve module "${m}"`))).toBe(result);
+  });
 });
 
 describe('LuaModuleResolverPlugin', () => {
