@@ -1,18 +1,16 @@
-local Function = {}
-
-Function.prototype = {}
+_G.Function = { prototype = {} }
 
 local unpack = unpack or table.unpack
 
-Function.prototype.apply = function(self, this, args)
-  return self(this, unpack(args))
+function Function.prototype.apply(self, this, args)
+  return self.__js and self(this, unpack(args)) or self(unpack(args))
 end
 
-Function.prototype.call = function(self, this, ...)
-  return self(this, ...)
+function Function.prototype.call(self, this, ...)
+  return self.__js and self(this, ...) or self(...)
 end
 
-Function.prototype.bind = function(self, this, ...)
+function Function.prototype.bind(self, this, ...)
   local isJs = self.__js
   local baseArgs = {...}
   local baseLen = #baseArgs
@@ -36,5 +34,3 @@ Function.prototype.bind = function(self, this, ...)
     return isJs and self(this, unpack(args)) or self(unpack(args))
   end
 end
-
-return Function

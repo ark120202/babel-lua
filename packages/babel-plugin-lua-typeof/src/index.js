@@ -31,7 +31,7 @@ export default function() {
           }
         }
 
-        const helper = this.addHelper('typeof');
+        const helper = t.memberExpression(t.identifier('Reflect'), t.identifier('__typeof'));
         const call = t.callExpression(helper, [node.argument]);
         const arg = path.get('argument');
 

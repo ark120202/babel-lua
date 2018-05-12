@@ -78,7 +78,7 @@ export default function() {
         path.replaceWith(declaration);
       },
 
-      'FunctionExpression|ArrowFunctionExpression': function FunctionExpression(path, state) {
+      'FunctionExpression|ArrowFunctionExpression': function FunctionExpression(path) {
         if (path.node[NO_MARK]) return;
         if (
           path.parentPath.isCallExpression() &&
@@ -97,7 +97,7 @@ export default function() {
           node.type = 'FunctionExpression';
         }
 
-        const helper = state.addHelper('markFunction');
+        const helper = t.memberExpression(t.identifier('Reflect'), t.identifier('__markFunction'));
 
         if (!isArrow && path.parentPath.isCallExpression({ id: helper.id })) {
           return;

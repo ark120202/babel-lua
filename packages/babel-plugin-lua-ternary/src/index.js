@@ -10,7 +10,7 @@ export default function() {
       ConditionalExpression(path) {
         const { node } = path;
 
-        const helper = this.addHelper('iif');
+        const helper = t.memberExpression(t.identifier('Reflect'), t.identifier('__iif'));
         const call = t.callExpression(helper, [
           node.test,
           wrapValue(node.consequent),

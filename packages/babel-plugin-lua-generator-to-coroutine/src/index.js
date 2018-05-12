@@ -26,7 +26,7 @@ export default function() {
         if (!node.generator) return;
         node.generator = false;
 
-        const helper = this.addHelper('wrapGenerator');
+        const helper = t.memberExpression(t.identifier('Reflect'), t.identifier('__wrapGenerator'));
         const call = t.callExpression(helper, [t.cloneNode(node)]);
 
         path.replaceWith(call);

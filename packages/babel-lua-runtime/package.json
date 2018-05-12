@@ -9,7 +9,7 @@
   "homepage": "https://github.com/ark120202/babel-lua#readme",
   "bugs": "https://github.com/ark120202/babel-lua/issues",
   "repository": "https://github.com/ark120202/babel-lua/tree/master/packages/babel-lua-runtime",
-  "main": "runtime/index.js",
+  "main": "index.js",
   "author": "ark120202",
   "license": "MIT",
   "devDependencies": {

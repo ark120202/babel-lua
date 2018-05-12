@@ -1,11 +1,10 @@
-local String = { prototype = {} }
+_G.String = { prototype = {} }
 
 String.fromCharCode = string.char
 String.fromCodePoint = nil
+String.raw = nil
 
-String.prototype = {}
-
-String.prototype.length = nil
+String.prototype.length = len
 String.prototype.constructor = nil
 String.prototype.anchor = nil
 String.prototype.big = nil
@@ -50,19 +49,3 @@ String.prototype.padStart = nil
 String.prototype.padEnd = nil
 String.prototype.toLocaleLowerCase = nil
 String.prototype.toLocaleUpperCase = nil
-
-String.raw = nil
-
--- busted uses these
-if _TESTING then
-	String.prototype.match = string.match
-	String.prototype.sub = string.sub
-	String.prototype.find = string.find
-	String.prototype.lower = string.lower
-	String.prototype.gmatch = string.gmatch
-	String.prototype.format = string.format
-	String.prototype.gsub = string.gsub
-	String.prototype.len = string.len
-end
-
-return String

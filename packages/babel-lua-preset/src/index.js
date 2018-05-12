@@ -14,7 +14,6 @@ import transformES2015Destructuring from '@babel/plugin-transform-destructuring'
 import luaGenerator from 'babel-plugin-lua-generator';
 import luaParameters from 'babel-plugin-lua-parameters';
 import luaReservedWords from 'babel-plugin-lua-reserved-words';
-import luaRuntime from 'babel-plugin-lua-runtime';
 import luaTernary from 'babel-plugin-lua-ternary';
 import luaTypeof from 'babel-plugin-lua-typeof';
 import luaGeneratorToCoroutine from 'babel-plugin-lua-generator-to-coroutine';
@@ -53,7 +52,6 @@ export default function(api, opts = {}) {
       luaGenerator,
       luaParameters,
       luaReservedWords,
-      luaRuntime,
       luaTernary,
       luaTypeof,
       luaGeneratorToCoroutine,

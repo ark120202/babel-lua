@@ -31,7 +31,6 @@
     "babel-plugin-lua-modules": "^1.0.0",
     "babel-plugin-lua-parameters": "^1.0.0",
     "babel-plugin-lua-reserved-words": "^1.0.0",
-    "babel-plugin-lua-runtime": "^1.0.0",
     "babel-plugin-lua-ternary": "^1.0.0",
     "babel-plugin-lua-typeof": "^1.0.0"
   },

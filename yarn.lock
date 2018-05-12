@@ -209,13 +209,6 @@
     "@babel/types" "7.0.0-beta.36"
     lodash "^4.2.0"
 
-"@babel/helper-module-imports@7.0.0-beta.46":
-  version "7.0.0-beta.46"
-  resolved "https://registry.yarnpkg.com/@babel/helper-module-imports/-/helper-module-imports-7.0.0-beta.46.tgz#8bd2e1fcfae883d28149a350e31ce606aa24eda6"
-  dependencies:
-    "@babel/types" "7.0.0-beta.46"
-    lodash "^4.2.0"
-
 "@babel/helper-module-transforms@7.0.0-beta.36":
   version "7.0.0-beta.36"
   resolved "https://registry.yarnpkg.com/@babel/helper-module-transforms/-/helper-module-transforms-7.0.0-beta.36.tgz#d88ac39b86d40065add150b71a09543b8daefe5f"
@@ -332,12 +325,6 @@
 "@babel/plugin-check-constants@7.0.0-beta.36":
   version "7.0.0-beta.36"
   resolved "https://registry.yarnpkg.com/@babel/plugin-check-constants/-/plugin-check-constants-7.0.0-beta.36.tgz#03aba1e17029f4d55f9bc9c13e1e82f289ab4773"
-
-"@babel/plugin-external-helpers@^7.0.0-beta.46":
-  version "7.0.0-beta.46"
-  resolved "https://registry.yarnpkg.com/@babel/plugin-external-helpers/-/plugin-external-helpers-7.0.0-beta.46.tgz#293c1ed7a5257eb50dfc93e468f1129a7802a3cf"
-  dependencies:
-    "@babel/helper-plugin-utils" "7.0.0-beta.46"
 
 "@babel/plugin-proposal-async-generator-functions@7.0.0-beta.36":
   version "7.0.0-beta.36"

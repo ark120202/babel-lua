@@ -1,2 +1,3 @@
-const x = babelHelpers.wrapGenerator(function () {});
+const x = Reflect.__wrapGenerator(function () {});
+
 var y = x();

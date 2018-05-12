@@ -1,2 +1,3 @@
-babelHelpers.iif(test, true, false);
-babelHelpers.iif(test, () => foo(), () => bar());
+Reflect.__iif(test, true, false);
+
+Reflect.__iif(test, () => foo(), () => bar());

@@ -1,1 +1,1 @@
-babelHelpers.typeof('string');
+Reflect.__typeof('string');

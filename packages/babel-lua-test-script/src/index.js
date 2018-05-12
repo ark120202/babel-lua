@@ -62,11 +62,10 @@ function testRunner(dir) {
           config.babelrc = false;
           config.filename = actualFile;
 
-          const externalHelpers = require.resolve('@babel/plugin-external-helpers');
           const pluginPath = path.join(pkgDir, 'src/index.js');
 
           if (!config.plugins) config.plugins = [];
-          config.plugins.push(externalHelpers, [pluginPath, options]);
+          config.plugins.push([pluginPath, options]);
 
           const actualTransformed = transform(actual, config).code.trim();
 
