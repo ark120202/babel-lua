@@ -68,7 +68,7 @@ export function FunctionDeclaration(node, parent) {
 }
 
 function Literal(node, parent) {
-  return t.isIndexExpression(parent) && parent.base === node;
+  return (t.isIndexExpression(parent) || t.isMemberExpression(parent)) && parent.base === node;
 }
 
 export {
