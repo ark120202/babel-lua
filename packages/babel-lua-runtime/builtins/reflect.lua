@@ -26,19 +26,36 @@ function Reflect:__wrapGenerator(f)
         local status, value = coroutine.resume(c, arg)
         if not status then
           return {done = true}
-        else
+        end
+
           return {
             value = value,
             done = coroutine.status(c) == "dead"
           }
-        end
       end,
-      throw = function()
-        error("generator.throw is not supported")
+      throw = function(_, arg)
+        local status, value = coroutine.resume(c, {__error = arg})
+        if not status then
+          error(value)
+        end
+
+        return {
+          value = value,
+          done = coroutine.status(c) == "dead"
+        }
       end,
       ["return"] = function()
         error("generator.return is not supported")
       end
     }
   end
+end
+
+function Reflect:__yield(...)
+  local result = coroutine.yield(...)
+  if type(result) == "table" and result.__error then
+    error(result.__error)
+  end
+
+  return result
 end

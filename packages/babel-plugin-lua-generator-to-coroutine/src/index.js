@@ -34,8 +34,8 @@ export default function() {
 
       YieldExpression(path) {
         const { node } = path;
-        const coroutineYield = t.memberExpression(t.identifier('coroutine'), t.identifier('yield'));
-        path.replaceWith(t.callExpression(coroutineYield, [t.cloneNode(node.argument)]));
+        const helper = t.memberExpression(t.identifier('Reflect'), t.identifier('__yield'));
+        path.replaceWith(t.callExpression(helper, [t.cloneNode(node.argument)]));
       },
     },
   };
