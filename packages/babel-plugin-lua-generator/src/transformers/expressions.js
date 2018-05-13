@@ -1,8 +1,13 @@
 import { types as bt } from '@babel/core';
 import * as t from 'lua-types';
 
+const operatorMap = new Map();
+operatorMap.set('===', '==');
+operatorMap.set('!=', '~=');
+operatorMap.set('!==', '~=');
+
 export function BinaryExpression(node) {
-  const operator = node.operator === '===' ? '==' : node.operator;
+  const operator = operatorMap.has(node.operator) ? operatorMap.get(node.operator) : node.operator;
   return t.binaryExpression(operator, this.transform(node.left), this.transform(node.right));
 }
 
