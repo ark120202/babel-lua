@@ -9,8 +9,15 @@ function Reflect:__iif(condition, t, f)
 end
 
 function Reflect:__typeof(o)
+  if o == nil then
+    return "undefined"
+  end
+
   local t = type(o)
-  return t == "table" and "object" or t
+  if t == "table" then
+    return t.constructor == Symbol and "symbol" or "object"
+  end
+  return t
 end
 
 function Reflect:__markFunction(f)

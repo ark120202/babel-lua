@@ -1,1 +1,0 @@
-Reflect.__typeof('string');

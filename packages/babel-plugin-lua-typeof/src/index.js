@@ -3,51 +3,32 @@ import { types as t } from '@babel/core';
 export default function() {
   return {
     visitor: {
-      Scope({ scope }) {
-        if (!scope.getBinding('Symbol')) {
-          return;
-        }
-
-        scope.rename('Symbol');
-      },
-
       UnaryExpression(path) {
         const { node, parent } = path;
         if (node.operator !== 'typeof') return;
 
         if (
           path.parentPath.isBinaryExpression() &&
-          t.EQUALITY_BINARY_OPERATORS.indexOf(parent.operator) >= 0
+          t.EQUALITY_BINARY_OPERATORS.includes(parent.operator)
         ) {
-          // optimise `typeof foo === "string"` since we can determine that they'll never
-          // need to handle symbols
+          // optimise `typeof foo === "string"`
           const opposite = path.getOpposite();
           if (
             opposite.isLiteral() &&
             opposite.node.value !== 'symbol' &&
             opposite.node.value !== 'object'
           ) {
-            path.replaceWith(t.callExpression(t.identifier('type'), [node.argument]));
+            if (opposite.node.value === 'undefined') {
+              path.parentPath.replaceWith(t.binaryExpression('==', node.argument, t.nullLiteral()));
+            } else {
+              path.replaceWith(t.callExpression(t.identifier('type'), [node.argument]));
+            }
+            return;
           }
         }
 
         const helper = t.memberExpression(t.identifier('Reflect'), t.identifier('__typeof'));
-        const call = t.callExpression(helper, [node.argument]);
-        const arg = path.get('argument');
-
-        if (arg.isIdentifier() && !path.scope.hasBinding(arg.node.name)) {
-          const undefLiteral = t.stringLiteral('undefined');
-          const unary = t.unaryExpression('typeof', node.argument);
-          path.replaceWith(
-            t.conditionalExpression(
-              t.binaryExpression('===', unary, undefLiteral),
-              undefLiteral,
-              call,
-            ),
-          );
-        } else {
-          path.replaceWith(call);
-        }
+        path.replaceWith(t.callExpression(helper, [node.argument]));
       },
     },
   };
