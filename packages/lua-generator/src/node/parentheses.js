@@ -67,6 +67,13 @@ export function FunctionDeclaration(node, parent) {
   return t.isCallExpression(parent) && parent.base === node;
 }
 
-export function TableConstructorExpression(node, parent) {
+function Literal(node, parent) {
   return t.isIndexExpression(parent) && parent.base === node;
 }
+
+export {
+  Literal as StringLiteral,
+  Literal as NumericLiteral,
+  Literal as BooleanLiteral,
+  Literal as TableConstructorExpression,
+};
