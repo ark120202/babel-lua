@@ -23,12 +23,21 @@ const RESERVED_WORDS_LUA = new Set([
   'while',
 ]);
 
-export default function() {
+export default function({ types: t }) {
   return {
     visitor: {
       'BindingIdentifier|ReferencedIdentifier': function BRIdentifier(path) {
         if (RESERVED_WORDS_LUA.has(path.node.name)) {
           path.scope.rename(path.node.name);
+        }
+      },
+      MemberExpression(path) {
+        const { node } = path;
+        if (!node.computed && RESERVED_WORDS_LUA.has(node.property.name)) {
+          node.property = t.stringLiteral(node.property.name);
+          node.computed = true;
+
+          if (path.parentPath.isCallExpression()) path.parentPath.requeue();
         }
       },
     },
