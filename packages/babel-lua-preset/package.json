@@ -25,6 +25,7 @@
     "@babel/plugin-transform-sticky-regex": "7.0.0-beta.46",
     "@babel/plugin-transform-template-literals": "7.0.0-beta.46",
     "@babel/plugin-transform-unicode-regex": "7.0.0-beta.46",
+    "babel-plugin-lua-bitwise-operators": "^1.0.0",
     "babel-plugin-lua-function-context": "^1.0.0",
     "babel-plugin-lua-generator": "^1.0.0",
     "babel-plugin-lua-generator-to-coroutine": "^1.0.0",

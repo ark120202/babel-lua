@@ -96,13 +96,15 @@ export function CallExpression(node) {
   return t.callExpression(this.transform(node.callee), this.transformList(node.arguments));
 }
 
+const NO_CONTEXT = Symbol.for('no context');
 export function MemberExpression(node, parent) {
   if (node.computed) {
     return t.indexExpression(this.transform(node.object), this.transform(node.property));
   }
 
   // Always pass context in calls, since most of Lua apis expect it
-  const indexer = bt.isCallExpression(parent) && parent.callee === node ? ':' : '.';
+  const indexer =
+    bt.isCallExpression(parent) && parent.callee === node && !node[NO_CONTEXT] ? ':' : '.';
   return t.memberExpression(this.transform(node.object), indexer, this.transform(node.property));
 }
 
