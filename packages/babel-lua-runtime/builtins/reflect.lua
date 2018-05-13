@@ -18,7 +18,7 @@ function Reflect:__markFunction(f)
   return f
 end
 
-function Reflect:__wrapGenerator()
+function Reflect:__wrapGenerator(f)
   return function()
     local c = coroutine.create(f)
     return {
