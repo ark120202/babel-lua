@@ -53,6 +53,10 @@ function Reflect:__wrapGenerator(f)
       end,
       ["return"] = function()
         error("generator.return is not supported")
+      end,
+      -- https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols#Is_a_generator_object_an_iterator_or_an_iterable
+      [Symbol.iterator] = function(self)
+        return self
       end
     }
   end
@@ -69,7 +73,7 @@ end
 
 function Reflect:__forOf(iterator)
   if iterator[Symbol.iterator] then
-    iterator = iterator[Symbol.iterator]:call(iterator)
+    iterator = iterator[Symbol.iterator](iterator)
 
     if iterator.next == nil then
       error("Result of the Symbol.iterator method is not an iterable")
