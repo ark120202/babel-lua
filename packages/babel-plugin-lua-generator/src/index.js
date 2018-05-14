@@ -9,14 +9,5 @@ export default function() {
       const lua = generate(luaAst, options, code);
       return lua;
     },
-
-    visitor: {
-      'BindingIdentifier|ReferencedIdentifier': function BRIdentifier(path) {
-        // see ForOfStatement
-        if (path.node.name === '__blk_') {
-          path.scope.rename(path.node.name);
-        }
-      },
-    },
   };
 }

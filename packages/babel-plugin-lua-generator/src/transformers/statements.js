@@ -160,11 +160,11 @@ export function ForOfStatement(node) {
   const variable = bt.isVariableDeclaration(node.left)
     ? this.transform(node.left.declarations[0].id)
     : this.transform(node.left);
+  const helper = t.memberExpression(t.identifier('Reflect'), ':', t.identifier('__forOf'));
 
   return t.forGenericStatement(
-    // TODO: Take care about scope neater.
-    [t.identifier('__blk_'), variable],
-    [t.callExpression(t.identifier('pairs'), [this.transform(node.right)])],
+    [variable],
+    [t.callExpression(helper, [this.transform(node.right)])],
     this.transformBlock(node.body),
   );
 }
