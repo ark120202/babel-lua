@@ -33,7 +33,7 @@ export default class Printer {
   _noLineTerminator = false;
   _endsWithInteger = false;
   _endsWithWord = false;
-  _endsWithCallStatement = false;
+  _endsWithCall = false;
 
   generate(ast) {
     this.print(ast);
@@ -68,7 +68,7 @@ export default class Printer {
   semicolon(force = false) {
     if (force || ((this.format.compact || this.format.concise) && !this.endsWith('\n'))) {
       this._append(';', !force);
-      this._endsWithCallStatement = false;
+      this._endsWithCall = false;
     }
   }
 
@@ -253,7 +253,7 @@ export default class Printer {
 
     const needsParens = n.needsParens(node, parent, this._printStack);
     if (needsParens) {
-      if (this._endsWithCallStatement) this.semicolon(true);
+      if (this._endsWithCall) this.semicolon(true);
       this.token('(');
     }
 
@@ -270,7 +270,11 @@ export default class Printer {
 
     // end
     this._printStack.pop();
-    this._endsWithCallStatement = node.type === 'CallStatement';
+    this._endsWithCall =
+      node.type === 'CallStatement' ||
+      (node.type === 'LocalStatement' &&
+        node.init.length > 0 &&
+        node.init[node.init.length - 1].type === 'CallExpression');
 
     this.format.concise = oldConcise;
   }
