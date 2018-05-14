@@ -156,14 +156,20 @@ export function ForInStatement(node) {
   );
 }
 
+const FOR_OF_UID = Symbol.for('for..of uid');
 export function ForOfStatement(node) {
   const variable = bt.isVariableDeclaration(node.left)
     ? this.transform(node.left.declarations[0].id)
     : this.transform(node.left);
   const helper = t.memberExpression(t.identifier('Reflect'), ':', t.identifier('__forOf'));
 
+  let uid = node[FOR_OF_UID];
+  // TODO: Apply visitor before transform in testing
+  if (uid == null && process.env.NODE_ENV === 'test') uid = bt.identifier('_');
+  if (uid == null) throw new Error('UID not found for ForOfStatement transform');
+
   return t.forGenericStatement(
-    [variable],
+    [this.transform(uid), variable],
     [t.callExpression(helper, [this.transform(node.right)])],
     this.transformBlock(node.body),
   );

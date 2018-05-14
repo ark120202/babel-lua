@@ -84,8 +84,7 @@ function Reflect:__forOf(iterator)
 
   return function()
     local result = iterator.next()
-    -- Lua breaks iteration once iterator returns nil.
-    -- In js it's posssible to iterate nil's, because iterable.next() has .done property
-    return result.value, result.done or nil
+    -- Lua stops iteration once iterator returns nil as first value, so return actual value second
+    return result.done and nil, result.value
   end
 end

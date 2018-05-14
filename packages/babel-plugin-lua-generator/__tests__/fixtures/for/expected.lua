@@ -38,10 +38,10 @@ for k in pairs(obj) do
   print(k, obj[k])
 end
 
-for v in Reflect:__forOf(obj) do
+for _, v in Reflect:__forOf(obj) do
   print(v)
 end
 
-for v in Reflect:__forOf(obj) do
+for _, v in Reflect:__forOf(obj) do
   print(v)
 end
