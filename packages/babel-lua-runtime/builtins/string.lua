@@ -1,8 +1,21 @@
-_G.String = { prototype = {} }
+_G.String = {prototype = {}}
 
 String.fromCharCode = string.char
 String.fromCodePoint = nil
 String.raw = nil
+
+String.prototype[Symbol.iterator] = function(self)
+  local i = -1
+  return {
+    next = function()
+      i = i + 1
+      return {
+        value = self[i],
+        done = self[i] == nil
+      }
+    end
+  }
+end
 
 String.prototype.constructor = nil
 String.prototype.anchor = nil
