@@ -70,10 +70,6 @@ export default class Printer {
       this._append(';', !force);
       this._endsWithCallStatement = false;
     }
-    // TODO: Print semicolons only when required.
-    // In most places in Lua semicolons can be replaced with newlines, but in this case it fails:
-    // (function() end)();
-    // (function() end)()
   }
 
   /**
