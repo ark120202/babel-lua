@@ -39,7 +39,7 @@ export default function() {
             path.node.arguments.unshift(object);
           } else {
             // Hard way
-            const objectId = t.identifier('_');
+            const objectId = path.scope.generateUidIdentifier('object');
             const body = [];
             // const _ = OBJECT;
             body.push(t.variableDeclaration('const', [t.variableDeclarator(objectId, object)]));

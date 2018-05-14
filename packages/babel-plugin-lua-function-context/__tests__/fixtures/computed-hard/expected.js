@@ -1,1 +1,1 @@
-(function () { const _ = c.chain(); return _['foo'](_, 'bar'); })();
+(function () { const _object = c.chain(); return _object['foo'](_object, 'bar'); })();
