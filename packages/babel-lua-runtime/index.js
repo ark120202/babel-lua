@@ -1,5 +1,6 @@
 _G.global = _G;
 import './builtins/function';
+import './builtins/symbol';
 import './builtins/string';
 import './builtins/globals';
 import './builtins/math';
