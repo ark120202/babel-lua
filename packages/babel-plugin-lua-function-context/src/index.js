@@ -34,7 +34,7 @@ export default function() {
 
           // Wrap computed
           const { object, property } = calleePath.node;
-          if (t.isIdentifier(object)) {
+          if (t.isIdentifier(object) || (t.isLiteral(object) && t.isImmutable(object))) {
             // Easy way
             path.node.arguments.unshift(object);
           } else {
