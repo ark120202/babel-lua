@@ -14,13 +14,13 @@
   "license": "MIT",
   "dependencies": {
     "@babel/core": "^7.0.0-beta.46",
-    "lodash": "^4.17.4",
+    "lodash": "^4.17.10",
     "lua-generator": "^1.0.0",
     "lua-types": "^1.0.0"
   },
   "devDependencies": {
     "babylon": "^7.0.0-beta.46",
-    "fs-extra": "^4.0.3",
+    "fs-extra": "^6.0.1",
     "luaparse": "^0.2.1"
   }
 }

@@ -13,13 +13,13 @@
   "author": "ark120202",
   "license": "MIT",
   "dependencies": {
-    "lodash": "^4.17.4",
+    "lodash": "^4.17.10",
     "lua-types": "^1.0.0",
-    "source-map": "^0.6.1",
+    "source-map": "^0.7.2",
     "trim-right": "^1.0.1"
   },
   "devDependencies": {
-    "fs-extra": "^4.0.2",
+    "fs-extra": "^6.0.1",
     "lua-parse": "^1.0.0"
   }
 }

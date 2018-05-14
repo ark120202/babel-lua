@@ -33,12 +33,13 @@ function testRunner(dir) {
 
   describe(pkgName, () => {
     fixtures.forEach(fixture => {
-      const actualFile = path.join(fixturesDir, fixture, 'actual.js');
-      const expectedFile = path.join(fixturesDir, fixture, 'expected.js');
-      const skipFile = path.join(fixturesDir, fixture, 'skip');
-      const configFileJS = path.join(fixturesDir, fixture, 'config.js');
-      const optionsFileJS = path.join(fixturesDir, fixture, 'options.js');
-      const optionsFileJSON = path.join(fixturesDir, fixture, 'options.json');
+      const workdir = path.join(fixturesDir, fixture);
+      const actualFile = path.join(workdir, 'actual.js');
+      const expectedFile = path.join(workdir, 'expected.js');
+      const skipFile = path.join(workdir, 'skip');
+      const configFileJS = path.join(workdir, 'config.js');
+      const optionsFileJS = path.join(workdir, 'options.js');
+      const optionsFileJSON = path.join(workdir, 'options.json');
 
       if (fs.isFileSync(skipFile)) {
         // eslint-disable-next-line jest/no-disabled-tests
@@ -61,6 +62,7 @@ function testRunner(dir) {
           }
           config.babelrc = false;
           config.filename = actualFile;
+          config.cwd = workdir;
 
           const pluginPath = path.join(pkgDir, 'src/index.js');
 
@@ -69,7 +71,7 @@ function testRunner(dir) {
 
           const actualTransformed = transform(actual, config).code.trim();
 
-          if (!await fs.isFile(expectedFile)) {
+          if (!(await fs.isFile(expectedFile))) {
             await fs.writeFile(expectedFile, actualTransformed);
             console.warn(`Created fixture's expected file - ${expectedFile}`);
           } else if (updateFixtures) {
