@@ -1,4 +1,4 @@
-_G.Function = { prototype = {} }
+_G.Function = {prototype = {}}
 
 local unpack = unpack or table.unpack
 
@@ -32,5 +32,33 @@ function Function.prototype.bind(self, this, ...)
     end
 
     return isJs and self(this, unpack(args)) or self(unpack(args))
+    end
   end
-end
+
+local functionCache = {}
+
+local functionProto = Function.prototype
+debug.setmetatable(
+  function()
+  end,
+  {
+    __index = function(self, index)
+      if functionCache[self] == nil or functionCache[self][index] == nil then
+        if index == "prototype" then
+          local proto = {}
+          self.prototype = proto
+          return proto
+        end
+        return functionProto[index]
+      else
+        return functionCache[self][index]
+      end
+    end,
+    __newindex = function(self, key, value)
+      if functionCache[self] == nil then
+        functionCache[self] = {}
+      end
+      functionCache[self][key] = value
+    end
+  }
+)

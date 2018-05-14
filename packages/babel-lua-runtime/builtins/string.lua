@@ -4,7 +4,6 @@ String.fromCharCode = string.char
 String.fromCodePoint = nil
 String.raw = nil
 
-String.prototype.length = len
 String.prototype.constructor = nil
 String.prototype.anchor = nil
 String.prototype.big = nil
@@ -49,3 +48,23 @@ String.prototype.padStart = nil
 String.prototype.padEnd = nil
 String.prototype.toLocaleLowerCase = nil
 String.prototype.toLocaleUpperCase = nil
+local stringProto = String.prototype
+debug.setmetatable(
+  "",
+  {
+    __add = function(self, str)
+      return self .. str
+    end,
+    __index = function(self, index)
+      if type(index) == "number" then
+        return index + 1 <= #self and string.sub(self, index + 1, index + 1) or nil
+      elseif index == "length" then
+        return string.len(self)
+      else
+        return stringProto[index]
+      end
+    end,
+    __newindex = function()
+    end
+  }
+)
