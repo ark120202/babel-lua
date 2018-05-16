@@ -22,6 +22,7 @@ import luaModules from 'babel-plugin-lua-modules';
 import bitwiseOperators from 'babel-plugin-lua-bitwise-operators';
 import luaTryCatch from 'babel-plugin-lua-try-catch';
 import luaAssignmentOperators from 'babel-plugin-lua-assignment-operators';
+import luaArray from 'babel-plugin-lua-array';
 
 export default function(api, opts = {}) {
   const loose = opts.loose || false;
@@ -64,6 +65,7 @@ export default function(api, opts = {}) {
       [bitwiseOperators, { target }],
       luaTryCatch,
       luaAssignmentOperators,
+      luaArray,
     ],
   };
 }

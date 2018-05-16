@@ -1,0 +1,1 @@
+new Array('a', 'b', 'c');
