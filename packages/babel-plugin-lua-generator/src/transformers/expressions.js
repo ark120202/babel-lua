@@ -36,7 +36,7 @@ export function AssignmentExpression(node, parent) {
 export function UpdateExpression(node, parent) {
   if (!bt.isExpressionStatement(parent)) {
     // FIXME: Use path.buildCodeFrameError
-    throw new Error("AssignmentExpression's not in ExpressionStatement's are not supported.");
+    throw new Error("UpdateExpression's not in ExpressionStatement's are not supported.");
   }
   if (node.operator !== '++' && node.operator !== '--') {
     // FIXME: Use path.buildCodeFrameError
