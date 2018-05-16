@@ -35,26 +35,10 @@ export default function() {
           // Wrap computed
           const { object, property } = calleePath.node;
           if (t.isIdentifier(object) || (t.isLiteral(object) && t.isImmutable(object))) {
-            // Easy way
             path.node.arguments.unshift(object);
           } else {
-            // Hard way
-            const objectId = path.scope.generateUidIdentifier('object');
-            const body = [];
-            // const _ = OBJECT;
-            body.push(t.variableDeclaration('const', [t.variableDeclarator(objectId, object)]));
-            // return _[PROPERTY](_, ...)
-            const returnCall = t.callExpression(
-              t.memberExpression(objectId, property, true),
-              [objectId].concat(path.node.arguments),
-            );
-            returnCall[NO_WRAP] = true;
-            body.push(t.returnStatement(returnCall));
-
-            const func = t.functionExpression(null, [], t.blockStatement(body));
-            const iife = t.callExpression(func, []);
-            iife._compact = true;
-            path.replaceWith(iife);
+            const helper = t.memberExpression(t.identifier('Reflect'), t.identifier('__computed'));
+            path.replaceWith(t.callExpression(helper, [object, property, ...path.node.arguments]));
           }
         }
       },

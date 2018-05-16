@@ -116,3 +116,7 @@ function Reflect:__try(try, catch, finally)
 
   return returns
 end
+
+function Reflect:__computed(obj, property, ...)
+  return obj[property](obj, ...)
+end
