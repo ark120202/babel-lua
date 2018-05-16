@@ -7,3 +7,7 @@ while (true) {
 do {
   print(true);
 } while (true);
+
+while (true) {
+  break;
+}

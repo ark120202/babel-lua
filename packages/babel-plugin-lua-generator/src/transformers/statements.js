@@ -174,3 +174,8 @@ export function ForOfStatement(node) {
     this.transformBlock(node.body),
   );
 }
+
+export function BreakStatement(node) {
+  if (node.label != null) throw new Error("Labeled BreakStatement's are not supported");
+  return t.breakStatement();
+}

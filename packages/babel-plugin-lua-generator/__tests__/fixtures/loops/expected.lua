@@ -9,3 +9,7 @@ end
 repeat
   print(true)
 until not true
+
+while true do
+  break
+end
