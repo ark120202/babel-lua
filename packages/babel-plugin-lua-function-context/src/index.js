@@ -88,7 +88,12 @@ export default function() {
           return;
         }
 
-        node.params.unshift(isArrow ? path.scope.generateUidIdentifier('_') : t.thisExpression());
+        if (isArrow) {
+          if (node.params.length > 0) node.params.unshift(path.scope.generateUidIdentifier('_'));
+        } else {
+          // TODO: Traverse body and insert it only when used
+          node.params.unshift(t.thisExpression());
+        }
 
         const call = t.callExpression(helper, [t.cloneNode(node)]);
         path.replaceWith(call);
