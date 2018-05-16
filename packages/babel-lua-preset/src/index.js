@@ -19,7 +19,7 @@ import luaTypeof from 'babel-plugin-lua-typeof';
 import luaGeneratorToCoroutine from 'babel-plugin-lua-generator-to-coroutine';
 import luaFunctionContext from 'babel-plugin-lua-function-context';
 import luaModules from 'babel-plugin-lua-modules';
-import bitwiseOperators from 'babel-plugin-lua-bitwise-operators';
+import luaBitwiseOperators from 'babel-plugin-lua-bitwise-operators';
 import luaTryCatch from 'babel-plugin-lua-try-catch';
 import luaAssignmentOperators from 'babel-plugin-lua-assignment-operators';
 import luaArray from 'babel-plugin-lua-array';
@@ -62,7 +62,7 @@ export default function(api, opts = {}) {
       luaGeneratorToCoroutine,
       luaFunctionContext,
       luaModules,
-      [bitwiseOperators, { target }],
+      [luaBitwiseOperators, { target }],
       luaTryCatch,
       luaAssignmentOperators,
       luaArray,
