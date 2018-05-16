@@ -15,7 +15,7 @@ function Reflect:__typeof(o)
 
   local t = type(o)
   if t == "table" then
-    return t.constructor == Symbol and "symbol" or "object"
+    return o.constructor == Symbol and "symbol" or "object"
   end
   return t
 end

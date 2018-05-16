@@ -7,6 +7,7 @@ function Symbol(this, name)
 
   local fullName = "Symbol(" .. name .. ")"
   return {
+    constructor = Symbol,
     toString = function()
       return fullName
     end
