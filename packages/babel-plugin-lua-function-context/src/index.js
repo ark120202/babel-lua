@@ -2,14 +2,12 @@ import { types as t } from '@babel/core';
 import splitExportDeclaration from '@babel/helper-split-export-declaration';
 
 const NO_MARK = Symbol('no mark');
-const NO_WRAP = Symbol('no wrap');
+const COMPUTED_WRAPPED = Symbol('computed wrapped');
 
 export default function() {
   return {
     visitor: {
       CallExpression(path) {
-        if (path.node[NO_WRAP]) return;
-
         const calleePath = path.get('callee');
 
         if (calleePath.isIdentifier()) {
@@ -31,6 +29,9 @@ export default function() {
         if (calleePath.isMemberExpression()) {
           const isComputed = calleePath.node.computed;
           if (!isComputed) return;
+
+          if (path.node[COMPUTED_WRAPPED]) return;
+          path.node[COMPUTED_WRAPPED] = true;
 
           // Wrap computed
           const { object, property } = calleePath.node;
