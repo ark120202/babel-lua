@@ -31,6 +31,7 @@ export default function({ types: t }) {
           path.scope.rename(path.node.name);
         }
       },
+
       MemberExpression(path) {
         const { node } = path;
         if (!node.computed && RESERVED_WORDS_LUA.has(node.property.name)) {
@@ -38,6 +39,13 @@ export default function({ types: t }) {
           node.computed = true;
 
           if (path.parentPath.isCallExpression()) path.parentPath.requeue();
+        }
+      },
+
+      ObjectProperty(path) {
+        const key = path.get('key');
+        if (key.isIdentifier() && RESERVED_WORDS_LUA.has(key.node.name)) {
+          key.replaceWith(t.stringLiteral(key.node.name));
         }
       },
     },
