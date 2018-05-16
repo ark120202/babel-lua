@@ -25,25 +25,12 @@ export function AssignmentExpression(node, parent) {
     // FIXME: Use path.buildCodeFrameError
     throw new Error("AssignmentExpression's not in ExpressionStatement's are not supported.");
   }
-  switch (node.operator) {
-    case '=':
-      return t.assignmentStatement([this.transform(node.left)], [this.transform(node.right)]);
-    case '+=':
-    case '-=':
-      return t.assignmentStatement(
-        [this.transform(node.left)],
-        [
-          t.binaryExpression(
-            node.operator === '+=' ? '+' : '-',
-            this.transform(node.left),
-            this.transform(node.right),
-          ),
-        ],
-      );
-    default:
-      // FIXME: Use path.buildCodeFrameError
-      throw new Error(`${node.operator} is unsupported assignment expression operator`);
+  if (node.operator !== '=') {
+    // FIXME: Use path.buildCodeFrameError
+    throw new Error(`${node.operator} is unsupported assignment expression operator`);
   }
+
+  return t.assignmentStatement([this.transform(node.left)], [this.transform(node.right)]);
 }
 
 export function UpdateExpression(node, parent) {
@@ -55,14 +42,13 @@ export function UpdateExpression(node, parent) {
     // FIXME: Use path.buildCodeFrameError
     throw new Error(`Invalid UpdateExpression operator ${node.operator}`);
   }
-  return this.transform(
-    bt.assignmentExpression(
-      node.operator === '++' ? '+=' : '-=',
-      node.argument,
-      bt.numericLiteral(1),
-    ),
-    parent,
+
+  const right = t.binaryExpression(
+    node.operator === '++' ? '+' : '-',
+    this.transform(node.argument),
+    t.numericLiteral(1),
   );
+  return t.assignmentStatement([this.transform(node.argument)], [right]);
 }
 
 export function UnaryExpression(node) {

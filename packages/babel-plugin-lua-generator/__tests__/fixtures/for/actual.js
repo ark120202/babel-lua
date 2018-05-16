@@ -24,7 +24,7 @@ for (var i = 0; 10 <= i; i--) {
 }
 
 // while
-for (var i = 0; i < 10; i += math.random()) {
+for (var i = 0; i < 10; i = i + math.random()) {
   print(i);
 }
 
