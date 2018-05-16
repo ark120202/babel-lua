@@ -35,7 +35,11 @@ export default function() {
 
           // Wrap computed
           const { object, property } = calleePath.node;
-          if (t.isIdentifier(object) || (t.isLiteral(object) && t.isImmutable(object))) {
+          if (
+            t.isIdentifier(object) ||
+            t.isThisExpression(object) ||
+            (t.isLiteral(object) && t.isImmutable(object))
+          ) {
             path.node.arguments.unshift(object);
           } else {
             const helper = t.memberExpression(t.identifier('Reflect'), t.identifier('__computed'));
