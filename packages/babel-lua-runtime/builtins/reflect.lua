@@ -88,3 +88,31 @@ function Reflect:__forOf(iterator)
     return result.done and nil, result.value
   end
 end
+
+Reflect.TryNil = {}
+function Reflect:__try(try, catch, finally)
+  local returns
+  local status, err = pcall(try)
+
+  if status then
+    returns = err
+  end
+
+  if not status and catch then
+    status = true
+    returns = catch:call(nil, err)
+  end
+
+  if finally then
+    local finalReturns = finally();
+    if finalReturns ~= nil then
+      returns = finalReturns
+    end
+  end
+
+  if not status then
+    error(err)
+  end
+
+  return returns
+end

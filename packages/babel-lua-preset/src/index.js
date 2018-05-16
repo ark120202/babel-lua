@@ -20,6 +20,7 @@ import luaGeneratorToCoroutine from 'babel-plugin-lua-generator-to-coroutine';
 import luaFunctionContext from 'babel-plugin-lua-function-context';
 import luaModules from 'babel-plugin-lua-modules';
 import bitwiseOperators from 'babel-plugin-lua-bitwise-operators';
+import luaTryCatch from 'babel-plugin-lua-try-catch';
 
 export default function(api, opts = {}) {
   const loose = opts.loose || false;
@@ -60,6 +61,7 @@ export default function(api, opts = {}) {
       luaFunctionContext,
       luaModules,
       [bitwiseOperators, { target }],
+      luaTryCatch,
     ],
   };
 }
