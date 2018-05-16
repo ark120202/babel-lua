@@ -10,6 +10,7 @@
   "bugs": "https://github.com/ark120202/babel-lua/issues",
   "repository": "https://github.com/ark120202/babel-lua/tree/master/packages/lua-generator",
   "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "author": "ark120202",
   "license": "MIT",
   "dependencies": {
