@@ -3,11 +3,19 @@ _G.Function = {prototype = {}}
 local unpack = unpack or table.unpack
 
 function Function.prototype.apply(self, this, args)
-  return self.__js and self(this, unpack(args)) or self(unpack(args))
+  if self.__js then
+    return self(this, unpack(args))
+  else
+    return self(unpack(args))
+  end
 end
 
 function Function.prototype.call(self, this, ...)
-  return self.__js and self(this, ...) or self(...)
+  if self.__js then
+    return self(this, ...)
+  else
+    return self(...)
+  end
 end
 
 function Function.prototype.bind(self, this, ...)
@@ -16,7 +24,11 @@ function Function.prototype.bind(self, this, ...)
   local baseLen = #baseArgs
   if baseLen == 0 then
     return function(...)
-      return isJs and self(this, ...) or self(...)
+      if isJs then
+        return self(this, ...)
+      else
+        return self(...)
+      end
     end
   end
 
@@ -31,9 +43,13 @@ function Function.prototype.bind(self, this, ...)
       args[baseLen + i] = callArgs[i]
     end
 
-    return isJs and self(this, unpack(args)) or self(unpack(args))
+    if isJs then
+      return self(this, unpack(args))
+    else
+      return self(unpack(args))
     end
   end
+end
 
 local functionCache = {}
 
