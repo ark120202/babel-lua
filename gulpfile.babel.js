@@ -31,7 +31,7 @@ gulp.task('build', () => {
 
 export function watch() {
   gulp.parallel('build')(() => null);
-  gulp.watch('packages/*/src/**.{js,d.ts}', gulp.task('build')).on('error', () => {});
+  gulp.watch('packages/*/src/**/*.{js,d.ts}', gulp.task('build')).on('error', () => {});
 }
 
 export const clean = () => del('packages/*/lib');
