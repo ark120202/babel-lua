@@ -5,6 +5,10 @@ const FOR_OF_UID = Symbol.for('for..of uid');
 export default function({ types: t }) {
   return {
     visitor: {
+      EmptyStatement(path) {
+        path.remove();
+      },
+
       ForOfStatement(path) {
         const uid = path.scope.generateUidIdentifier('');
         path.node[FOR_OF_UID] = uid;
