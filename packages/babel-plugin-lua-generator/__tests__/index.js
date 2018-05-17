@@ -35,8 +35,8 @@ describe('babel-generator-lua', () => {
         it(group, async () => {
           const directory = path.join(__dirname, 'fixtures', group);
           const [js, lua] = await Promise.all([
-            readFile(path.join(directory, 'actual.js')),
-            readFile(path.join(directory, 'expected.lua')),
+            readFile(path.join(directory, 'input.js')),
+            readFile(path.join(directory, 'output.lua')),
           ]);
 
           let jsAst = babylon.parse(js);

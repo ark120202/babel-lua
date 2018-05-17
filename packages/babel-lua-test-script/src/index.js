@@ -34,8 +34,8 @@ function testRunner(dir) {
   describe(pkgName, () => {
     fixtures.forEach(fixture => {
       const workdir = path.join(fixturesDir, fixture);
-      const actualFile = path.join(workdir, 'actual.js');
-      const expectedFile = path.join(workdir, 'expected.js');
+      const inputFile = path.join(workdir, 'input.js');
+      const outputFile = path.join(workdir, 'output.js');
       const skipFile = path.join(workdir, 'skip');
       const configFileJS = path.join(workdir, 'config.js');
       const optionsFileJS = path.join(workdir, 'options.js');
@@ -46,7 +46,7 @@ function testRunner(dir) {
         test.skip(fixture, () => {});
       } else {
         test(fixture, async () => {
-          const actual = await fs.readFile(actualFile);
+          const input = await fs.readFile(inputFile);
 
           let options = {};
           if (await fs.isFile(optionsFileJS)) {
@@ -61,7 +61,7 @@ function testRunner(dir) {
             config = require(configFileJS);
           }
           config.babelrc = false;
-          config.filename = actualFile;
+          config.filename = inputFile;
           config.cwd = workdir;
 
           const pluginPath = path.join(pkgDir, 'src/index.js');
@@ -69,20 +69,20 @@ function testRunner(dir) {
           if (!config.plugins) config.plugins = [];
           config.plugins.push([pluginPath, options]);
 
-          const actualTransformed = transform(actual, config).code.trim();
+          const actualTransformed = transform(input, config).code.trim();
 
-          if (!(await fs.isFile(expectedFile))) {
-            await fs.writeFile(expectedFile, actualTransformed);
-            console.warn(`Created fixture's expected file - ${expectedFile}`);
+          if (!(await fs.isFile(outputFile))) {
+            await fs.writeFile(outputFile, actualTransformed);
+            console.warn(`Created fixture's expected file - ${outputFile}`);
           } else if (updateFixtures) {
-            const expected = await fs.readFile(expectedFile);
+            const expected = await fs.readFile(outputFile);
             if (expected !== actualTransformed) {
-              await fs.writeFile(expectedFile, actualTransformed);
-              console.warn(`Updated fixture's expected file - ${expectedFile}`);
+              await fs.writeFile(outputFile, actualTransformed);
+              console.warn(`Updated fixture's expected file - ${outputFile}`);
             }
           } else {
-            const expected = (await fs.readFile(expectedFile)).trim();
-            expect(actualTransformed).toBe(expected);
+            const output = (await fs.readFile(outputFile)).trim();
+            expect(actualTransformed).toBe(output);
           }
         });
       }
