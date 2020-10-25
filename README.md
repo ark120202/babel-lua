@@ -1,3 +1,7 @@
+# This package is not in-development anymore. Check out [TypeScriptToLua](https://github.com/TypeScriptToLua/TypeScriptToLua) instead.
+
+---
+
 <p align="center">
   <a href="https://github.com/ark120202/babel-lua">
     <img alt="Babel Lua" src="https://raw.githubusercontent.com/ark120202/babel-lua/master/logo.png" height="225">
@@ -34,7 +38,6 @@ yarn add -D @babel/core babel-lua-preset
 npm install -D @babel/core babel-lua-preset
 ```
 
-
 > Babel Lua is not published to npm now, instead you can clone this repository, build it and install module from directory.
 
 2. Modify your Babel config to use `babel-lua-preset`.
@@ -55,6 +58,7 @@ babel-lua-preset is incompatible with babel-preset-env, so to use next ES versio
 
 With Babel Lua you can use modules from npm.
 `import 'module'` is transformed to `require('node_modules.module')`.
+
 > Note: only ES6 modules are supported
 
 ```js
