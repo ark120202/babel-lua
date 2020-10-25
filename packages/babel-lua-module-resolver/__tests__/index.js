@@ -1,6 +1,6 @@
+import resolveFrom from 'resolve-from';
 import path from 'path';
-import { NodeJsInputFileSystem, CachedInputFileSystem, ResolverFactory } from 'enhanced-resolve';
-import { findImports, replaceImports, LuaModuleResolverPlugin } from '../src';
+import { findImports, replaceImports, getRelativeLuaPath } from '../src';
 
 describe('findImports', () => {
   test('should parse with double quotes', () => {
@@ -45,36 +45,23 @@ describe('replaceImports', () => {
   });
 });
 
-describe('LuaModuleResolverPlugin', () => {
-  const luaRoot = __dirname;
-  const localRoot = path.resolve(__dirname, '..');
+describe('getRelativeLuaPath', () => {
   const context = path.join(__dirname, 'fixtures');
-  const resolver = ResolverFactory.createResolver({
-    extensions: ['.js', '.lua'],
-    fileSystem: new CachedInputFileSystem(new NodeJsInputFileSystem(), 4000),
-    plugins: [new LuaModuleResolverPlugin(localRoot, luaRoot)],
-    useSyncFileSystemCalls: true,
-  });
-  const resolve = request => resolver.resolveSync({}, context, request);
+  const resolveFixture = request => getRelativeLuaPath(__dirname, resolveFrom(context, request));
 
   test('should resolve relative to luaRoot', () => {
-    expect(resolve('./test.js')).toBe('fixtures.test');
-  });
-
-  test('should resolve .lua and .js', () => {
-    expect(resolve('./test.js')).toBe('fixtures.test');
-    expect(resolve('./test.lua')).toBe('fixtures.test');
+    expect(resolveFixture('./test.js')).toBe('fixtures/test');
   });
 
   test('should resolve node modules', () => {
-    expect(resolve('enhanced-resolve')).toBe('node_modules.enhanced-resolve.lib.node');
+    expect(resolveFixture('lodash')).toBe('node_modules/lodash/lodash');
   });
 
   test("shouldn't resolve paths outside of luaRoot", () => {
-    expect(() => resolve('../../package.json')).toThrow();
+    expect(() => resolveFixture('../../package.json')).toThrow();
   });
 
   test("shouldn't resolve paths with dots", () => {
-    expect(() => resolve('./file.name.lua')).toThrow();
+    expect(() => resolveFixture('./file.name.lua')).toThrow();
   });
 });

@@ -1,7 +1,7 @@
 _G.String = {prototype = {}}
 
 String.fromCharCode = string.char
-String.fromCodePoint = nil
+String.fromCodePoint = string.char
 String.raw = nil
 
 String.prototype[Symbol.iterator] = function(self)
@@ -26,18 +26,40 @@ String.prototype.charAt = nil
 String.prototype.charCodeAt = nil
 String.prototype.codePointAt = nil
 String.prototype.concat = nil
-String.prototype.endsWith = nil
+
+function String.prototype:endsWith(searchString, length)
+  if searchString == "" then
+    return true
+  end
+
+  if length ~= nil then
+    return string.sub(self, length - string.len(searchString) + 1, length) == searchString
+  else
+    return string.sub(self, -string.len(searchString)) == searchString
+  end
+end
+
 String.prototype.fontcolor = nil
 String.prototype.fontsize = nil
 String.prototype.fixed = nil
-String.prototype.includes = nil
-String.prototype.indexOf = nil
+
+function String.prototype:includes(value)
+  return string.find(self, value, 1, true) ~= nil
+end
+
+function String.prototype:indexOf(value)
+  local v = string.find(self, value, 1, true)
+  return v or -1
+end
+
 String.prototype.italics = nil
 String.prototype.lastIndexOf = nil
 String.prototype.link = nil
 String.prototype.localeCompare = nil
 String.prototype.normalize = nil
-String.prototype["repeat"] = nil
+
+String.prototype["repeat"] = string.rep
+
 String.prototype.replace = nil
 String.prototype.slice = nil
 String.prototype.small = nil
@@ -47,20 +69,41 @@ String.prototype.sub = nil
 String.prototype.substr = nil
 String.prototype.substring = nil
 String.prototype.sup = nil
-String.prototype.startsWith = nil
+
+function String.prototype:startsWith(searchString, position)
+  return string.sub(self, (position or 0) + 1, string.len(searchString) + (position or 0)) == searchString
+end
+
 String.prototype.toString = nil
-String.prototype.trim = nil
-String.prototype.trimLeft = nil
-String.prototype.trimRight = nil
-String.prototype.toLowerCase = nil
-String.prototype.toUpperCase = nil
+
+function String.prototype:trim()
+  local v = string.gsub(self, "^%s*(.-)%s*$", "%1")
+  return v
+end
+
+function String.prototype:trimLeft()
+  local v = string.gsub(self, "^%s*", "")
+  return v
+end
+
+function String.prototype:trimRight()
+  local n = #self
+  while n > 0 and string.find(self, "^%s", n) do
+    n = n - 1
+  end
+  return string.sub(self, 1, n)
+end
+
+String.prototype.toLowerCase = string.lower
+String.prototype.toUpperCase = string.upper
 String.prototype.valueOf = nil
 String.prototype.match = nil
 String.prototype.search = nil
 String.prototype.padStart = nil
 String.prototype.padEnd = nil
-String.prototype.toLocaleLowerCase = nil
-String.prototype.toLocaleUpperCase = nil
+String.prototype.toLocaleLowerCase = string.lower
+String.prototype.toLocaleUpperCase = string.upper
+
 local stringProto = String.prototype
 debug.setmetatable(
   "",

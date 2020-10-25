@@ -13,7 +13,9 @@
   "author": "ark120202",
   "license": "MIT",
   "dependencies": {
-    "enhanced-resolve": "^4.0.0",
     "upath": "^1.0.5"
+  },
+  "devDependencies": {
+    "resolve-from": "^4.0.0"
   }
 }

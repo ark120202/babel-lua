@@ -1,0 +1,23 @@
+{
+  "name": "babel-plugin-lua-vscripts-enums",
+  "version": "1.0.0",
+  "description": "Cut scope from Dota 2 VScript enums.",
+  "keywords": [
+    "babel-lua",
+    "babel-lua-vscripts",
+    "babel-plugin"
+  ],
+  "homepage": "https://github.com/ark120202/babel-lua#readme",
+  "bugs": "https://github.com/ark120202/babel-lua/issues",
+  "repository": "https://github.com/ark120202/babel-lua/tree/master/packages/babel-plugin-lua-vscripts-enums",
+  "main": "lib/index.js",
+  "author": "ark120202",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "^7.0.0-beta.46",
+    "babel-lua-test-script": "^1.0.0"
+  },
+  "peerDependencies": {
+    "@babel/core": "^7.0.0-beta.46"
+  }
+}

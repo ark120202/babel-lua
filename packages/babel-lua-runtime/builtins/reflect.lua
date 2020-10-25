@@ -120,3 +120,106 @@ end
 function Reflect:__computed(obj, property, ...)
   return obj[property](obj, ...)
 end
+
+local unpack = unpack or table.unpack
+function Reflect:unpack(target)
+  return unpack(target, 1, table.maxn(target))
+end
+
+function Reflect:__unpackIterable(arrayLike)
+  if arrayLike[Symbol.iterator] then
+    arrayLike = arrayLike[Symbol.iterator](arrayLike)
+
+    if arrayLike == nil or arrayLike.next == nil then
+      error("Result of the Symbol.iterator method is not an iterable")
+    end
+  elseif arrayLike.next == nil then
+    error("Array.from argument is not iterable")
+  end
+
+  local target = {}
+  while true do
+    local result = arrayLike.next()
+    if result.done then
+      break
+    end
+    if mapFn then
+      result.value = mapFn(result.value)
+    end
+    table.insert(target, result.value)
+  end
+
+  return Reflect:unpack(target)
+end
+
+function Reflect:__new(subClass, ...)
+  local proto = subClass.prototype
+  local mt
+  mt = {
+    _getters = {},
+    _setters = {},
+    __index = function(self, key)
+      local inSelf = rawget(self, key)
+      if inSelf ~= nil then
+        return inSelf
+      else
+        local getter = mt._getters[key]
+        if getter ~= nil then
+          return getter(self)
+        else
+          return proto[key]
+        end
+      end
+    end,
+    __newindex = function(self, key, value)
+      local setter = mt._setters[key]
+      if setter ~= nil then
+        setter(self, value)
+      else
+        rawset(self, key, value)
+      end
+    end
+  }
+
+  local instance = setmetatable({}, mt)
+  instance.constructor = subClass
+  instance = subClass:call(instance, ...) or instance
+  return instance
+end
+
+local function noop()
+end
+
+function Reflect:__makeConstructor(subClass, constructor, superClass)
+  constructor = constructor or noop
+  subClass.__super = superClass
+
+  local mt = getmetatable(subClass) or {}
+  mt.__call = constructor
+  return setmetatable(subClass, mt)
+end
+
+function Reflect:__instanceof(self, c)
+  local m = self.constructor
+  while m do
+    if m == c then
+      return true
+    end
+    m = m.__super
+  end
+  return false
+end
+
+function Reflect:__assertThisInitialized(self)
+  if self == nil then
+    error("this hasn't been initialised - super() hasn't been called")
+  end
+  return self
+end
+
+function Reflect:__inherits(subClass, superClass)
+  for k, v in pairs(superClass.prototype) do
+    subClass.prototype[k] = v
+  end
+  setmetatable(subClass, {__index = superClass})
+end

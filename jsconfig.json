@@ -1,0 +1,11 @@
+{
+  "include": ["gulpfile.babel.js", "types/**/*", "packages/**/*"],
+  "compilerOptions": {
+    "target": "es2017",
+    "module": "commonjs",
+    "baseUrl": ".",
+    "paths": {
+      "*": ["./packages/*"]
+    }
+  }
+}

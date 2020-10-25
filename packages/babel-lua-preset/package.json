@@ -4,6 +4,7 @@
   "description": "JavaScript to Lua compiler powered by Babel.",
   "keywords": [
     "babel-lua",
+    "babel-preset",
     "babel-plugin"
   ],
   "homepage": "https://github.com/ark120202/babel-lua#readme",
@@ -28,6 +29,7 @@
     "babel-plugin-lua-array": "^1.0.0",
     "babel-plugin-lua-assignment-operators": "^1.0.0",
     "babel-plugin-lua-bitwise-operators": "^1.0.0",
+    "babel-plugin-lua-classes": "^1.0.0",
     "babel-plugin-lua-function-context": "^1.0.0",
     "babel-plugin-lua-generator": "^1.0.0",
     "babel-plugin-lua-generator-to-coroutine": "^1.0.0",

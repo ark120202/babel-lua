@@ -1,0 +1,4 @@
+@decorated
+class MyClass {
+  foo() {}
+}

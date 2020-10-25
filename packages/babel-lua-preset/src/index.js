@@ -16,6 +16,7 @@ import luaParameters from 'babel-plugin-lua-parameters';
 import luaReservedWords from 'babel-plugin-lua-reserved-words';
 import luaTernary from 'babel-plugin-lua-ternary';
 import luaTypeof from 'babel-plugin-lua-typeof';
+import luaClasses from 'babel-plugin-lua-classes';
 import luaGeneratorToCoroutine from 'babel-plugin-lua-generator-to-coroutine';
 import luaFunctionContext from 'babel-plugin-lua-function-context';
 import luaModules from 'babel-plugin-lua-modules';
@@ -55,6 +56,7 @@ export default function(api, opts = {}) {
       // transformES2015BlockScoping,
 
       luaGenerator,
+      luaClasses,
       luaParameters,
       luaReservedWords,
       luaTernary,

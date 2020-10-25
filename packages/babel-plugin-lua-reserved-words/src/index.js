@@ -1,3 +1,6 @@
+// https://www.lua.org/manual/5.3/manual.html#3.1
+// TODO: https://www.npmjs.com/package/transliteration
+const IDENTIFIER_REGEXP = /[^\w]/g;
 const RESERVED_WORDS_LUA = new Set([
   'and',
   'break',
@@ -23,18 +26,24 @@ const RESERVED_WORDS_LUA = new Set([
   'while',
 ]);
 
+function escapeIdentifier(name) {
+  if (RESERVED_WORDS_LUA.has(name)) return name;
+  if (IDENTIFIER_REGEXP.test(name)) return name.replace(IDENTIFIER_REGEXP, '');
+
+  return null;
+}
+
 export default function({ types: t }) {
   return {
     visitor: {
       'BindingIdentifier|ReferencedIdentifier': function BRIdentifier(path) {
-        if (RESERVED_WORDS_LUA.has(path.node.name)) {
-          path.scope.rename(path.node.name);
-        }
+        const name = escapeIdentifier(path.node.name);
+        if (name != null) path.scope.rename(name);
       },
 
       MemberExpression(path) {
         const { node } = path;
-        if (!node.computed && RESERVED_WORDS_LUA.has(node.property.name)) {
+        if (!node.computed && escapeIdentifier(node.property.name) != null) {
           node.property = t.stringLiteral(node.property.name);
           node.computed = true;
 
@@ -44,7 +53,7 @@ export default function({ types: t }) {
 
       ObjectProperty(path) {
         const key = path.get('key');
-        if (key.isIdentifier() && RESERVED_WORDS_LUA.has(key.node.name)) {
+        if (key.isIdentifier() && escapeIdentifier(key.node.name) != null) {
           key.replaceWith(t.stringLiteral(key.node.name));
         }
       },
